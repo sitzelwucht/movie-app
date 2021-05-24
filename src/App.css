@@ -1,38 +1,42 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Fredoka+One&family=Inconsolata&family=Lobster&display=swap');
+
+body {
+  background: rgb(4, 4, 65);
+}
+input:focus, input.form-control:focus {
+  outline:none !important;
+  outline-width: 0 !important;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+}
+h1 {
+  font-family: 'Fredoka One';
+  color: orange;
   text-align: center;
+  font-size: 5.5em!important;
+}
+h1 span {
+  color: rgb(247, 189, 83);
+}
+.form-control {
+  background: rgb(54, 83, 136);
+  font-family: 'Inconsolata';
+  font-size: 1.2em;
+  letter-spacing: .05em;
+  border: none; 
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.form-control:focus {
+  background: rgb(147, 177, 233);  
+}
+.btn,
+.form-control  {
+  font-size: 1.2em;
+  border-radius: 0!important;
+  padding: 15px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.form-control::placeholder {
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
