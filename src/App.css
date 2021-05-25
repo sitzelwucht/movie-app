@@ -40,3 +40,30 @@ h1 span {
 .form-control::placeholder {
   color: white;
 }
+
+input {
+  background: rgb(54, 83, 136);
+  font-family: 'Inconsolata';
+  font-size: 1.2em;
+  letter-spacing: .05em;
+  border: none; 
+  font-size: 1.2em;
+  border-radius: 0!important;
+  padding: 15px;
+}
+.welcome-logo {
+  transition: all .8s ease-in
+}
+
+.movie-item {
+  background: rgba(20,20,20,.4);
+  color: white;
+  margin: 10px;
+  padding: 20px;
+}
+
+.search-results {
+  background: rgba(220,220,220,.4);
+  padding: 10px;
+  width: 65%;
+}
