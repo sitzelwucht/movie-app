@@ -20,7 +20,7 @@ export default function SearchBar(props) {
         if(query) {
             const response = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${process.env.REACT_APP_API_KEY}`)
             const movieData = await response.data.results
-        
+
             let results = []
     
             movieData.forEach(elem => {
@@ -32,7 +32,8 @@ export default function SearchBar(props) {
                 posterUrl: elem.poster_path,
                 release: elem.release_date,
                 title: elem.title,
-                voteAvg: elem.vote_average
+                voteAvg: elem.vote_average,
+                id: elem.id
               })
             })
             
@@ -74,9 +75,11 @@ export default function SearchBar(props) {
             {
                 noInput ? null : (!searchResults.length ? <div>No results</div> : searchResults.map((item, i) => {
                     return <ListItem key={i} 
+                        id={item.id}
                         title={item.title}
                         release={item.release}
                         overview={item.overview}
+                        
                     />
                 }))
             }
