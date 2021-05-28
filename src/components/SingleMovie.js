@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter, useHistory } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 import axios from 'axios'
 
-export default function SingleMovie(props) {
+function SingleMovie(props) {
 
+    const history = useHistory();
     const [movie, setMovie] = useState()
     const [similar, setSimilar] = useState([])
 
@@ -33,10 +35,10 @@ export default function SingleMovie(props) {
     const getSimilarMovies = async () => {
         const response = await axios.get(`https://api.themoviedb.org/3/movie/${props.id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`)
         const similarMovies = await response.data
-        console.log(similarMovies)
         setSimilar(similarMovies.results)
 
     }
+
 
     useEffect(() => {
         getMovie()
@@ -48,6 +50,7 @@ export default function SingleMovie(props) {
      
             { movie && <>
                 <div>
+                <Button variant="link" onClick={() => history.goBack()}>back</Button>
                     <h2>{movie.title}</h2>
                     { movie.title !== movie.original_title && <h4>{movie.original_title}</h4>}
                 </div>
@@ -76,3 +79,5 @@ export default function SingleMovie(props) {
         </div>
     )
 }
+
+export default withRouter(SingleMovie)

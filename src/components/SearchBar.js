@@ -53,27 +53,15 @@ export default function SearchBar(props) {
 
 
     return (
-        <div>
-        {/* <Form onSubmit={handleSearch}>
-        <InputGroup className="mb-3">
-                <FormControl
-                name="search"
-                placeholder="type to search..."
-                aria-label="Recipient's username"
-                />
-                <InputGroup.Append>
-                <Button type="submit" variant="danger" >Go</Button>
-                </InputGroup.Append>
-            </InputGroup>
-        </Form> */}
+        <div id="search">
 
-        <input type="text" id="keywordSearch" placeholder="start typing to search" 
+        <input type="text" id="keywordSearch" placeholder="search..." 
             onChange={handleInputDynamically} ref={searchRef}
         />
         <div className="search-results">
 
             {
-                noInput ? null : (!searchResults.length ? <div>No results</div> : searchResults.map((item, i) => {
+                noInput ? null : (!searchResults.length ? <div className="mt-3 no-results">No results</div> : searchResults.map((item, i) => {
                     return <ListItem key={i} 
                         id={item.id}
                         title={item.title}
