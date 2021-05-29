@@ -53,11 +53,12 @@ export default function SearchBar(props) {
 
 
     return (
-        <div id="search">
+        <div id="search" className="mt-5">
 
         <input type="text" id="keywordSearch" placeholder="search..." 
             onChange={handleInputDynamically} ref={searchRef}
         />
+        
         <div className="search-results">
 
             {

@@ -9,6 +9,8 @@ function SingleMovie(props) {
     const [movie, setMovie] = useState()
     const [similar, setSimilar] = useState([])
 
+    const [hide, setHide] = useState(false)
+
     const getMovie = async () => {
         const response = await axios.get(`https://api.themoviedb.org/3/movie/${props.id}?api_key=${process.env.REACT_APP_API_KEY}`)
         const movie = await response.data
@@ -43,14 +45,23 @@ function SingleMovie(props) {
     useEffect(() => {
         getMovie()
         getSimilarMovies()
+        setHide(false)
     }, [props])
 
+    useEffect(() => {
+
+    }, [hide])
     return (
-        <div className="movie-box">
+        <>
+        {
+           !hide && <div className="movie-box">
      
             { movie && <>
                 <div>
-                <Button variant="link" onClick={() => history.goBack()}>back</Button>
+                    <div className="d-flex justify-content-between mb-3">
+                        <Button variant="outline-light" onClick={() => history.goBack()}>back</Button>
+                        <Button variant="dark" onClick={() => setHide(true)}>X</Button>
+                    </div>
                     <h2>{movie.title}</h2>
                     { movie.title !== movie.original_title && <h4>{movie.original_title}</h4>}
                 </div>
@@ -77,6 +88,9 @@ function SingleMovie(props) {
             </>}
 
         </div>
+        }
+        
+        </>
     )
 }
 

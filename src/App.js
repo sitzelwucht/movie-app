@@ -6,24 +6,24 @@ import Landing from './components/Landing'
 import NavBar from './components/NavBar';
 import SingleMovie from './components/SingleMovie';
 import SearchBar from './components/SearchBar';
+import IntroLogo from './components/IntroLogo';
 
 
 function App() {
 
-  const [isSmall, setIsSmall] = useState(false)
-
 
   return (
     <>
-   <div className="App d-flex mx-auto w-75">
+   <div className="main-container d-flex mx-auto w-75">
 
-    <Switch>
 
-      <Route exact path="/" render={() => {
-        return (
-        <Landing small={isSmall}/>
-        )
-      }} />
+      {/* <Route exact path="/" render={() => {
+        return <SearchBar />
+      }} /> */}
+
+      <IntroLogo />
+
+      <SearchBar />
 
       <Route path="/movie/:id" render={(routeProps) => {
         return <SingleMovie 
@@ -31,8 +31,8 @@ function App() {
         />
       }} />
 
-    </Switch>
-      
+
+
     </div>
     </>
   );

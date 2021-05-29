@@ -43,29 +43,16 @@ ul a:hover {
   
 }
 .form-control {
-  background: rgb(54, 83, 136);
   font-family: 'Inconsolata';
   font-size: 1.2em;
   letter-spacing: .05em;
   border: none; 
-}
-
-.form-control:focus {
-  background: rgb(147, 177, 233);  
-}
-
-.form-control  {
-  font-size: 1.2em;
   border-radius: 0!important;
   padding: 15px;
-}
-
-.form-control::placeholder {
-  color: white;
 }
 
 input {
-  background: rgb(54, 83, 136);
+  background: rgb(255, 165, 62);
   font-family: 'Inconsolata';
   font-size: 1.2em;
   letter-spacing: .05em;
@@ -73,6 +60,16 @@ input {
   font-size: 1.2em;
   border-radius: 0!important;
   padding: 15px;
+}
+
+input::placeholder {
+  color: black;
+}
+
+.main-container {
+  background: rgba(220,220,220,.1);
+  max-height: 100vh;
+  min-height: 100vh!important;
 }
 .welcome-logo {
   display: flex;
@@ -81,7 +78,10 @@ input {
   transition: all .8s ease-in
 }
 
-.welcome-small {
+.logo {
+  border: 1px solid red;
+}
+.logo-small {
   transform: scale(.7);
 }
 #search {
@@ -110,13 +110,20 @@ input {
   padding: 10px;
   width: 65%;
 }
-
+.search-results {
+  margin: 30px 0;
+  max-height: 75vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
 .movie-box {
-  background: rgba(220,220,220,.3);
+  background: rgba(220,220,220,.1);
   color: white;
-  padding: 30px;
+  padding: 10px;
   width: 45%;
-  margin: 50px auto;
+  margin: 50px;
+  min-height: 75vh;
+  max-height: 75vh;
 }
 
 .movie-box > div {
@@ -124,4 +131,19 @@ input {
 }
 .movie-box h6 {
   font-style: italic;
+}
+
+::-webkit-scrollbar-track
+{
+  background-color: transparent;
+}
+
+::-webkit-scrollbar
+{
+  width: 15px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb
+{
+  background-color: rgba(0, 61, 153, 0.6);
 }
