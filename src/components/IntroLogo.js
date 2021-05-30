@@ -10,7 +10,7 @@ export default function IntroLogo() {
                 <img src="/popcorn.png" height="300" alt="popcorn" />
             </div>
             <div className="m-5 d-flex justify-content-around w-75">
-                <Button variant="outline-info">create account</Button>
+                <Button variant="outline-warning">create account</Button>
                 <Button variant="outline-light">log in</Button>
             </div>
         </div>

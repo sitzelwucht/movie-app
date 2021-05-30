@@ -18,6 +18,7 @@ function SingleMovie(props) {
         setMovie({
 
         id: movie.id,
+        genres: movie.genres,
         original_language: movie.original_language,
         original_title: movie.original_title,
         overview: movie.overview,
@@ -57,22 +58,56 @@ function SingleMovie(props) {
            !hide && <div className="movie-box">
      
             { movie && <>
-                <div>
+                <div id="buttons">
                     <div className="d-flex justify-content-between mb-3">
                         <Button variant="outline-light" onClick={() => history.goBack()}>back</Button>
                         <Button variant="dark" onClick={() => setHide(true)}>X</Button>
                     </div>
-                    <h2>{movie.title}</h2>
-                    { movie.title !== movie.original_title && <h4>{movie.original_title}</h4>}
                 </div>
+
+                <div className="reversed">
+                    <h2>{movie.title} ({movie.release_date.substr(0,4)})</h2>
+                    { movie.title !== movie.original_title && <h4>{movie.original_title} </h4>}
+                    <h6 className="mt-5">{movie.tagline}</h6>
+                </div>
+
                 <div>
-                <div>Release: {movie.release_date}</div>
-                <div>Runtime: {movie.runtime} mins</div>
-                <div>Rating: {movie.vote_average} <span>({movie.vote_count} votes</span>)</div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td className="bold">Genre:</td>
+                            <td className="indent">
+                                {
+                                    <ul>
+                                {
+                                movie.genres.length ? movie.genres.map((item, i) => {
+                                        return <li>{item.name}</li>
+                                    }) : <li>N/A</li>
+                                }
+                                </ul>
+                                }</td>
+                            </tr>
+                            <tr>
+                                <td className="bold">Release:</td>
+                                <td className="indent">{movie.release_date}</td>
+                            </tr>
+                            <tr>
+                                <td className="bold">Runtime:</td>
+                                <td className="indent">{movie.runtime} mins</td>
+                            </tr>
+                            <tr>
+                                <td className="bold">Rating:</td>
+                                <td className="indent">{movie.vote_average} <span>({movie.vote_count} votes</span>)</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div><h6>{movie.tagline}</h6></div>
-      
-                <div>{movie.overview}</div>
+                
+                <div className="reversed">
+                
+        
+                    <div>{movie.overview}</div>
+                </div>
                 <div>
                     <h5>Similar movies: </h5>
                     <ul>

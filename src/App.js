@@ -7,7 +7,7 @@ import NavBar from './components/NavBar';
 import SingleMovie from './components/SingleMovie';
 import SearchBar from './components/SearchBar';
 import IntroLogo from './components/IntroLogo';
-
+import Footer from './components/Footer'
 
 function App() {
 
@@ -32,8 +32,8 @@ function App() {
       }} />
 
 
-
     </div>
+    <Footer />
     </>
   );
 }
