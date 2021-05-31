@@ -109,15 +109,23 @@ input::placeholder {
 
 .main-container {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   background: rgba(50,50,50,.1);
+  margin: auto;
   max-height: 100vh;
   min-height: 100vh!important;
   backdrop-filter: blur(6px);
+  width: 70vw;
 }
 
 .mini {
-  justify-content: space-between;
+  width: 70vw;
+  background: rgba(50,50,50,.1);
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .welcome-logo {
@@ -177,13 +185,13 @@ input::placeholder {
   overflow-y: scroll;
 }
 .movie-box {
-  background: rgba(220,220,220,.3);
+  background: rgba(180,180,180,.2);
   color: white;
   width: 45%;
-  margin: 50px;
+  margin: 75px 50px;
   backdrop-filter: blur(10px);
-  min-height: 75vh;
-  max-height: 75vh;
+  min-height: 80vh;
+  max-height: 80vh;
   overflow-y: auto;
 }
 .buttons {

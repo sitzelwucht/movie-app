@@ -103,7 +103,7 @@ function SingleMovie(props) {
                             </tr>
                             <tr>
                                 <td className="bold">Rating:</td>
-                                <td className="indent">{movie.vote_average} <span>({movie.vote_count} votes</span>)</td>
+                                <td className="indent">{movie.vote_average}/10 <span>({movie.vote_count} votes</span>)</td>
                             </tr>
                         </tbody>
                     </table>

@@ -15,6 +15,7 @@ function App() {
 
 
   const handleMinimize = () => {
+    alert('h')
     setMinimize(true)
   }
 
@@ -30,12 +31,13 @@ function App() {
 
   return (
     <>
-   <div className="main-container mx-auto w-75">
+   <div className="mx-auto w-75 d-flex">
 
-
-      <IntroLogo mini={minimize} />
-
-      <SearchBar />
+      <Landing 
+      mini={minimize} 
+      handleMinimize={handleMinimize}
+        
+      />
 
       <Route path="/movie/:id" render={(routeProps) => {
         return <SingleMovie 

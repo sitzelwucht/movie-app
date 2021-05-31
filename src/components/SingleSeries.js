@@ -80,7 +80,7 @@ export default function SingleSeries(props) {
                             </tr>
                             <tr>
                                 <td className="bold">Rating:</td>
-                                <td className="indent">{series.vote_average} <span>({series.vote_count} votes</span>)</td>
+                                <td className="indent">{series.vote_average}/10 <span>({series.vote_count} votes</span>)</td>
                             </tr>
                         </tbody>
                     </table>
