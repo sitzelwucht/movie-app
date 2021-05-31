@@ -18,6 +18,12 @@ footer {
   position: absolute;
   bottom: 0;
 }
+
+footer button {
+  color: rgba(250, 177, 41, 0.966)!important;
+  text-decoration: none!important;
+}
+
 h1 {
   font-family: 'Fredoka One';
   color: orange;
@@ -75,20 +81,22 @@ ul a:hover {
 }
 
 input {
-  background: rgb(255, 165, 62);
+  background: transparent;
   font-family: 'Inconsolata';
   font-size: 1.2em;
   letter-spacing: .05em;
   border: none; 
+  border-bottom: 1px solid grey;
   font-size: 1.2em;
   border-radius: 0!important;
   padding: 15px;
   margin: 35px auto 0 auto;
-  width:100%!important
+  width:100%!important;
+  color: white;
 }
 
 input::placeholder {
-  color: black;
+  color: rgb(167, 167, 167);
 }
 
 .nav-tabs a {
@@ -107,33 +115,42 @@ input::placeholder {
   border: none!important
 }
 
+.page {
+  display: flex;
+  width: 85%;
+  margin: auto;
+}
+
 .main-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background: rgba(50,50,50,.1);
+  background: rgba(50,50,50,.2);
   margin: auto;
-  max-height: 100vh;
-  min-height: 100vh!important;
+  /* max-height: 100vh;
+  min-height: 100vh!important; */
   backdrop-filter: blur(6px);
   width: 70vw;
 }
 
 .mini {
   width: 70vw;
-  background: rgba(50,50,50,.1);
+  background: rgba(50,50,50,.2);
   margin: auto;
   display: flex;
   justify-content: space-evenly;
 }
-
+.intro-container {
+  background: rgba(0, 0, 0, 0.342);
+  width: 13vw;
+}
 .welcome-logo {
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: all .8s ease-in;
-  margin: 75px 50px;
+  margin: 35px 50px;
 }
 
 .logo-small {
@@ -141,20 +158,20 @@ input::placeholder {
   transition: all .8s ease-in;
 
 }
-#search {
+.search {
   margin: 75px 50px;
-  min-width: 450px;
-  max-width: 450px;
-  position: relative;
+  min-width: 400px;
+  max-width: 400px;
 }
 .search-results {
   -webkit-mask-image: linear-gradient(to top, black 90%, transparent 100%);
   mask-image: linear-gradient(to top, black 90%, transparent 100%);
   height:  60vh;
   overflow-y: scroll;
+  font-size: 18px;
 }
 
-#search > * {
+.search > * {
   max-width: 100%;
   min-width: 100%;
 }
@@ -226,4 +243,72 @@ input::placeholder {
 ::-webkit-scrollbar-thumb
 {
   background-color: rgba(160, 160, 160, 0.432);
+}
+
+
+@media screen and (max-width: 800px) {
+  
+  .page {
+    width: 100%;
+  }
+  .main-container {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .mini {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .intro-container {
+    height: 200px;
+  }
+  .logo-small {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .welcome-logo img {
+    height: 120px;
+  }
+  .logo-small {
+    height: 180px;
+  }
+  .search {
+    margin: auto;
+  }
+
+  .search-results {
+    height: 30vh;
+    font-size: 18px;
+    margin-bottom: 0p;
+  }
+  .movie-box {
+    width: 90%;
+    margin-top: 0;
+    margin-bottom: 100px;
+  }
+  .movie-box > div{
+    margin: 0;
+    width: 100%;
+  }
+
+  footer {
+    background: rgba(50, 50, 50, 0.247);
+    justify-content: space-between;
+    display: flex;
+    position: fixed;
+    width: 100vw;
+    height: 80px;
+    bottom: 0;
+    backdrop-filter: blur(5px);
+  }
+
+  .footer-btns {
+    display: flex;
+  }
 }

@@ -31,15 +31,15 @@ function App() {
 
   return (
     <>
-   <div className="mx-auto w-75 d-flex">
-
+   {/* <div className="mx-auto w-75 d-flex"> */}
+    <div className="page">
       <Landing 
       mini={minimize} 
       handleMinimize={handleMinimize}
         
       />
 
-      <Route path="/movie/:id" render={(routeProps) => {
+      {/* <Route path="/movie/:id" render={(routeProps) => {
         return <SingleMovie 
           id={routeProps.match.params.id}
         />
@@ -55,7 +55,7 @@ function App() {
         return <SingleSeries 
           id={routeProps.match.params.id}
         />
-      }} />
+      }} /> */}
 
 
     </div>

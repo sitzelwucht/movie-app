@@ -118,7 +118,7 @@ export default function SearchBar(props) {
 
 
     return (
-        <div id="search">
+        <div class="search">
 
             <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
                 <Tab eventKey="profile" title="Movies">
@@ -139,7 +139,7 @@ export default function SearchBar(props) {
             </Tabs>
 
 
-                <div className="search-results" id="container3">
+                <div className="search-results">
                     {
                         noInput ? null : (!searchResults.length ? <div className="no-results">No results</div> : searchResults.map((item, i) => {
                             return <ListItem key={i}

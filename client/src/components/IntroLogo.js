@@ -7,10 +7,10 @@ export default function IntroLogo(props) {
     
 
     return (
-        <div>
+        <div className="intro-container">
              <div className={props.mini ? "logo-small" : "welcome-logo"}>
-                <h1>Movie <span>App</span></h1>
-                <img src="/popcorn.png" height="300" alt="popcorn" />
+                <div><h1>Movie <span>App</span></h1></div>
+                <div><img src="/popcorn.png" height="300" alt="popcorn" /></div>
             </div>
 
         </div>
