@@ -20,6 +20,14 @@ h1 {
 h1 span {
   color: rgb(247, 189, 83);
 }
+
+h2 {
+  font-size: 1.4em;
+}
+
+h4{
+  font-size: 1.2em;
+}
 a {
   color: rgb(247, 189, 83);
   text-decoration: none;
@@ -42,8 +50,6 @@ ul a {
 ul a:hover {
   color: rgb(255, 255, 255);
   
-}
-table {
 }
 .indent {
   padding-left: 50px;
@@ -70,16 +76,29 @@ input {
   font-size: 1.2em;
   border-radius: 0!important;
   padding: 15px;
+  margin: 50px;
 }
 
 input::placeholder {
   color: black;
 }
 
+.nav-tabs a {
+  color: rgb(255, 165, 62)!important;
+  font-size:2em!important
+}
+.nav-tabs {
+  border: none!important;
+}
+.nav-link.active {
+  background: rgba(78, 78, 78, 0.411)!important;
+  border-color: transparent!important;
+}
 .main-container {
   background: rgba(220,220,220,.1);
   max-height: 100vh;
   min-height: 100vh!important;
+  backdrop-filter: blur(6px);
 }
 .welcome-logo {
   display: flex;
@@ -106,7 +125,7 @@ input::placeholder {
 .no-results {
   color: white;
 }
-.movie-item {
+.list-item {
   background: rgba(20,20,20,.4);
   color: white;
   max-width: 100%;
@@ -114,7 +133,7 @@ input::placeholder {
   margin-top: 15px;
   padding: 20px;
 }
-.movie-item 
+.list-item 
 .search-results {
   background: rgba(220,220,220,.4);
   padding: 10px;
@@ -131,6 +150,7 @@ input::placeholder {
   color: white;
   width: 45%;
   margin: 50px;
+  backdrop-filter: blur(10px);
   /* min-height: 75vh;
   max-height: 75vh; */
 }

@@ -14,7 +14,7 @@ function SingleMovie(props) {
     const getMovie = async () => {
         const response = await axios.get(`https://api.themoviedb.org/3/movie/${props.id}?api_key=${process.env.REACT_APP_API_KEY}`)
         const movie = await response.data
-        
+        console.log(movie)
         setMovie({
 
         id: movie.id,
@@ -59,8 +59,8 @@ function SingleMovie(props) {
      
             { movie && <>
                 <div id="buttons">
-                    <div className="d-flex justify-content-between mb-3">
-                        <Button variant="outline-light" onClick={() => history.goBack()}>back</Button>
+                    <div className="d-flex justify-content-between">
+                        <Button variant="outline-light" onClick={() => history.goBack()}>˂</Button>
                         <Button variant="dark" onClick={() => setHide(true)}>X</Button>
                     </div>
                 </div>
@@ -68,7 +68,10 @@ function SingleMovie(props) {
                 <div className="reversed">
                     <h2>{movie.title} ({movie.release_date.substr(0,4)})</h2>
                     { movie.title !== movie.original_title && <h4>{movie.original_title} </h4>}
-                    <h6 className="mt-5">{movie.tagline}</h6>
+                    <div>{movie.production_countries.map((item, i) => {
+                                        return <li>{item.name}</li>
+                                    })}</div>
+                    { movie.tagline && <h6 className="mt-5">{movie.tagline}</h6> }
                 </div>
 
                 <div>
@@ -109,7 +112,7 @@ function SingleMovie(props) {
                     <div>{movie.overview}</div>
                 </div>
                 <div>
-                    <h5>Similar movies: </h5>
+                    { similar.length > 0 && <h5>Similar movies: </h5> }
                     <ul>
                     {
                         similar.map((item, i) => {
