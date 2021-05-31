@@ -10,10 +10,12 @@ function Person(props) {
 
     const [hide, setHide] = useState(false)
     const [showFull, setShowFull] = useState(false)
+
     const getPerson = async () => {
 
         const response = await axios.get(`https://api.themoviedb.org/3/person/${props.id}?api_key=${process.env.REACT_APP_API_KEY}`)
         const person = await response.data
+        console.log(person)
         setPerson({
             movie: false,
             name: person.name,
@@ -21,7 +23,8 @@ function Person(props) {
             birthday: person.birthday,
             death: person.deathday,
             placeOfBirth: person.place_of_birth,
-            imdbId: person.imdb_id
+            imdbId: person.imdb_id,
+            img: person.profile_path
         })
 
     }
@@ -37,8 +40,14 @@ function Person(props) {
 
         { person && <>
         
-            <div >
-                <h2>{person.name}</h2>
+            <div className="d-flex justify-content-between align-items-center">
+            
+                <div >
+                    <h2>{person.name}</h2>
+                </div>
+                <div>
+                   { person.img && <img src={`http://image.tmdb.org/t/p/w200/${person.img}`} alt="profile" />} 
+                </div>
             </div>
 
             <div className="reversed">
@@ -64,24 +73,19 @@ function Person(props) {
                 </table>
             </div>
 
-            
             { person.bio &&
                 <div>
 
                 {
                     showFull ? 
-                    <>{person.bio} <Button variant="link" onClick={() => setShowFull(false)}>show less</Button></> : 
+                    <> {person.bio} <Button variant="link" onClick={() => setShowFull(false)}>show less</Button></> : 
                     <> {person.bio.substr(0, 400)} <Button variant="link" onClick={() => setShowFull(true)}>show more</Button></>
 
                 }
             </div>
-        
-            
             }
-        
             </>
         }
-
         </div>
     </>
     )

@@ -62,15 +62,21 @@ function SingleMovie(props) {
                     </div>
                 </div>
 
-                <div className="reversed">
-                    <h2>{movie.title} ({movie.release_date.substr(0,4)})</h2>
-                    { movie.title !== movie.original_title && <h4>{movie.original_title} </h4>}
-                    <div>{movie.production_countries.map((item, i) => {
-                                        return <li>{item.name}</li>
-                                    })}</div>
-                    { movie.tagline && <h6 className="mt-5">{movie.tagline}</h6> }
-                </div>
+                <div className="reversed d-flex justify-content-between align-items-center">
 
+                    <div>
+                        <h2>{movie.title} ({movie.release_date.substr(0,4)})</h2>
+                        { movie.title !== movie.original_title && <h4>{movie.original_title} </h4>}
+                        <div>{movie.production_countries.map((item, i) => {
+                                            return <li>{item.name}</li>
+                                        })}</div>
+                        { movie.tagline && <h6 className="mt-5">{movie.tagline}</h6> }
+
+                        </div>
+                    <div><img src={`http://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt="poster" /></div>
+                    
+                </div>
+               
                 <div>
                     <table>
                         <tbody>

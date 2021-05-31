@@ -9,10 +9,6 @@ export default function NavBar() {
                 <Nav.Link eventKey="link-1">Link</Nav.Link>
                 <Nav.Link eventKey="link-2">Link</Nav.Link>
             </Nav>
-
-
-
-
         </div>
     )
 }

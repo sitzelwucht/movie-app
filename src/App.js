@@ -1,9 +1,8 @@
-import { useState } from 'react'
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Route, withRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 import Landing from './components/Landing'
-import NavBar from './components/NavBar';
 import SingleMovie from './components/SingleMovie';
 import SingleSeries from './components/SingleSeries'
 import Person from './components/Person'
@@ -12,14 +11,29 @@ import IntroLogo from './components/IntroLogo';
 import Footer from './components/Footer'
 
 function App() {
+  const [minimize, setMinimize] = useState(false)
+
+
+  const handleMinimize = () => {
+    setMinimize(true)
+  }
+
+
+  useEffect(() => {
+    document.addEventListener('keydown', setMinimize)
+
+    return () => {
+      document.removeEventListener('keydown', setMinimize)
+    }
+  })
 
 
   return (
     <>
-   <div className="main-container d-flex mx-auto w-75">
+   <div className="main-container mx-auto w-75">
 
 
-      <IntroLogo />
+      <IntroLogo mini={minimize} />
 
       <SearchBar />
 

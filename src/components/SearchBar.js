@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Button, InputGroup, FormControl, Form, Tabs, Tab } from 'react-bootstrap'
+import { Tabs, Tab } from 'react-bootstrap'
 import axios from 'axios'
 import ListItem from './ListItem'
 
@@ -118,7 +118,7 @@ export default function SearchBar(props) {
 
 
     return (
-        <div id="search" className="mt-5">
+        <div id="search">
 
             <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
                 <Tab eventKey="profile" title="Movies">
@@ -138,24 +138,25 @@ export default function SearchBar(props) {
                 </Tab>
             </Tabs>
 
-            <div className="search-results">
-                {
-                    noInput ? null : (!searchResults.length ? <div className="mt-3 no-results">No results</div> : searchResults.map((item, i) => {
-                        return <ListItem key={i}
-                            movie={item.movie}
-                            series={item.series} 
-                            id={item.id}
-                            title={item.title}
-                            name={item.name}
-                            release={item.release}
-                            overview={item.overview}
-                            knownFor={item.known_for}
-                            knownForDept={item.known_for_department}
-                        />
-                    }))
-                }
 
-            </div>
+                <div className="search-results" id="container3">
+                    {
+                        noInput ? null : (!searchResults.length ? <div className="no-results">No results</div> : searchResults.map((item, i) => {
+                            return <ListItem key={i}
+                                movie={item.movie}
+                                series={item.series} 
+                                id={item.id}
+                                title={item.title}
+                                name={item.name}
+                                release={item.release}
+                                overview={item.overview}
+                                knownFor={item.known_for}
+                                knownForDept={item.known_for_department}
+                            />
+                        }))
+                    }
+
+                </div>
         </div>
     )
 }

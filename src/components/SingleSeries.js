@@ -15,7 +15,7 @@ export default function SingleSeries(props) {
     const getSeries = async () => {
         const response = await axios.get(`https://api.themoviedb.org/3/tv/${props.id}?api_key=${process.env.REACT_APP_API_KEY}`)
         const series = await response.data
-
+        console.log(series)
         setSeries({
         first_air_date: series.first_air_date,
         genre_ids: series.genre_ids,
@@ -27,7 +27,8 @@ export default function SingleSeries(props) {
         overview: series.overview,
         popularity: series.popularity,
         vote_average: series.vote_average,
-        vote_count: series.vote_count
+        vote_count: series.vote_count,
+        poster_path: series.poster_path
         })
     }
 
@@ -48,7 +49,9 @@ export default function SingleSeries(props) {
 
     return (
         <>
-        <div className="movie-box">
+        { !hide && 
+        
+            <div className="movie-box">
         { series && <>
                 <div id="buttons">
                     <div className="d-flex justify-content-between">
@@ -57,10 +60,15 @@ export default function SingleSeries(props) {
                     </div>
                 </div>
 
-                <div className="reversed">
-                    <h2>{series.title} ({series.first_air_date.substr(0,4)})</h2>
-                    { series.title !== series.original_name && <h4>{series.original_name} </h4>}
-                    <div>{series.origin_country}</div>
+                <div className="reversed d-flex justify-content-between align-items-center">
+                    <div>
+                        <h2>{series.title} ({series.first_air_date && series.first_air_date.substr(0,4)})</h2>
+                        { series.title !== series.original_name && <h4>{series.original_name} </h4>}
+                        <div>{series.origin_country}</div>
+                    </div>
+                    <div>
+                        {series.poster_path && <img src={`http://image.tmdb.org/t/p/w200/${series.poster_path}`} alt="poster" />}
+                    </div>
                 </div>
 
                 <div>
@@ -68,11 +76,7 @@ export default function SingleSeries(props) {
                         <tbody>
                             <tr>
                                 <td className="bold">Release:</td>
-                                <td className="indent">{series.first_air_date}</td>
-                            </tr>
-                            <tr>
-                                <td className="bold">Runtime:</td>
-                                <td className="indent">{series.runtime} mins</td>
+                                <td className="indent">{series.first_air_date ? series.first_air_date : 'N/A'}</td>
                             </tr>
                             <tr>
                                 <td className="bold">Rating:</td>
@@ -102,6 +106,9 @@ export default function SingleSeries(props) {
             </>}
 
         </div>
+        
+        
+        }
         </>
     )
 }
