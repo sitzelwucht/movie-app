@@ -3,6 +3,9 @@
 body {
   /* background: rgb(4, 4, 65); */
   background: url('pexels-tima-miroshnichenko-7991436.jpg') no-repeat center bottom;
+  background-attachment: fixed;
+  max-height: 100vh;
+  position: relative;
 }
 input:focus, input.form-control:focus {
   outline:none !important;
@@ -10,6 +13,10 @@ input:focus, input.form-control:focus {
   box-shadow: none;
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
+}
+footer {
+  position: absolute;
+  bottom: 0;
 }
 h1 {
   font-family: 'Fredoka One';
@@ -76,7 +83,7 @@ input {
   font-size: 1.2em;
   border-radius: 0!important;
   padding: 15px;
-  margin: 50px;
+  margin: 35px;
 }
 
 input::placeholder {
@@ -91,9 +98,14 @@ input::placeholder {
   border: none!important;
 }
 .nav-link.active {
-  background: rgba(78, 78, 78, 0.411)!important;
+  background: rgba(78, 78, 78, 0.521)!important;
   border-color: transparent!important;
 }
+.nav-link:hover {
+  background: rgba(220,220,220,.3)!important;
+  border: none!important
+}
+
 .main-container {
   background: rgba(220,220,220,.1);
   max-height: 100vh;
@@ -151,8 +163,9 @@ input::placeholder {
   width: 45%;
   margin: 50px;
   backdrop-filter: blur(10px);
-  /* min-height: 75vh;
-  max-height: 75vh; */
+  min-height: 75vh;
+  max-height: 75vh;
+  overflow-y: scroll;
 }
 .buttons {
   padding: 0;
@@ -165,6 +178,9 @@ input::placeholder {
 }
 .movie-box ul {
   margin: 0;
+}
+.movie-box button {
+  color: rgba(255, 255, 255, 0.644)!important
 }
 .reversed {
   background: rgba(20,20,20, .5);

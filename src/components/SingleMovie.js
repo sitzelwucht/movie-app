@@ -14,9 +14,8 @@ function SingleMovie(props) {
     const getMovie = async () => {
         const response = await axios.get(`https://api.themoviedb.org/3/movie/${props.id}?api_key=${process.env.REACT_APP_API_KEY}`)
         const movie = await response.data
-        console.log(movie)
-        setMovie({
 
+        setMovie({
         id: movie.id,
         genres: movie.genres,
         original_language: movie.original_language,
@@ -49,9 +48,7 @@ function SingleMovie(props) {
         setHide(false)
     }, [props])
 
-    useEffect(() => {
 
-    }, [hide])
     return (
         <>
         {

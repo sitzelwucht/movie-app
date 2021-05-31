@@ -5,6 +5,8 @@ import './App.css';
 import Landing from './components/Landing'
 import NavBar from './components/NavBar';
 import SingleMovie from './components/SingleMovie';
+import SingleSeries from './components/SingleSeries'
+import Person from './components/Person'
 import SearchBar from './components/SearchBar';
 import IntroLogo from './components/IntroLogo';
 import Footer from './components/Footer'
@@ -17,16 +19,24 @@ function App() {
    <div className="main-container d-flex mx-auto w-75">
 
 
-      {/* <Route exact path="/" render={() => {
-        return <SearchBar />
-      }} /> */}
-
       <IntroLogo />
 
       <SearchBar />
 
       <Route path="/movie/:id" render={(routeProps) => {
         return <SingleMovie 
+          id={routeProps.match.params.id}
+        />
+      }} />
+
+      <Route path="/people/:id" render={(routeProps) => {
+        return <Person 
+          id={routeProps.match.params.id}
+        />
+      }} />
+
+      <Route path="/series/:id" render={(routeProps) => {
+        return <SingleSeries 
           id={routeProps.match.params.id}
         />
       }} />

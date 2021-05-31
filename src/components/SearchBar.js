@@ -7,6 +7,7 @@ export default function SearchBar(props) {
 
     const [movies, setMovies] = useState([])
     const [people, setPeople] = useState([])
+    const [series, setSeries] = useState([])
     const [searchResults, setSearchResults] = useState([])
     const [noInput, setNoInput] = useState(true)
 
@@ -21,19 +22,16 @@ export default function SearchBar(props) {
         if(query) {
             const response = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${process.env.REACT_APP_API_KEY}`)
             const movieData = await response.data.results
-
             let results = []
     
             movieData.forEach(elem => {
               results.push({
+                movie: true,
                 origLang: elem.original_language,
                 origTitle: elem.original_title,
                 overview: elem.overview,
-                popularity: elem.popularity,
-                posterUrl: elem.poster_path,
                 release: elem.release_date,
                 title: elem.title,
-                voteAvg: elem.vote_average,
                 id: elem.id
               })
             })
@@ -55,7 +53,6 @@ export default function SearchBar(props) {
         if(query) {
             const response = await axios.get(`https://api.themoviedb.org/3/search/person?query=${query}&api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&include_adult=false`)
             const peopleData = await response.data.results
-            console.log(peopleData)
             let results = []
     
             peopleData.forEach(elem => {
@@ -77,16 +74,32 @@ export default function SearchBar(props) {
     }
 
 
-    const handleKeywordSearch = async (e) => {
+    const handleTVSearch = async (e) => {
         e.preventDefault()
         let query = e.target.value
 
-        const response = await axios.get(`https://api.themoviedb.org/3/search/multi?query=${query}&api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&include_adult=false`)
-        const peopleData = await response.data
-        console.log(peopleData)
+        if(query) {
+            const response = await axios.get(`https://api.themoviedb.org/3/search/tv?query=${query}&api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&include_adult=false`)
+        const seriesData = await response.data.results
+        let results = []
+
+        seriesData.forEach(elem => {
+            results.push({
+                series: true,
+                id: elem.id,
+                title: elem.name,
+                overview: elem.overview,
+                release: elem.first_air_date
+            })
+        })
+
+        setNoInput(false)
+        setSeries(results)  
+
+        } else if (!query) {
+            setNoInput(true)
+        }
     }
-
-
 
       useEffect(() => {
             setSearchResults(movies)
@@ -98,42 +111,51 @@ export default function SearchBar(props) {
         }, [people])
 
 
+      useEffect(() => {
+        setSearchResults(series)
+        }, [series])
+
+
+
     return (
         <div id="search" className="mt-5">
 
-        <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-            <Tab eventKey="home" title="Movies">
-                <input type="text" placeholder="search movies..." 
-                onChange={handleMovieSearch} ref={searchRef}
-                />   
-            </Tab>
-            <Tab eventKey="profile" title="People">
-                <input type="text" placeholder="search people..." 
-                onChange={handlePeopleSearch} ref={searchRef}
-                />
-            </Tab>
-            <Tab eventKey="contact" title="Any" >
-            <input type="text" placeholder="search with keyword..." 
-                onChange={handleKeywordSearch} ref={searchRef}
-                />
-            </Tab>
-        </Tabs>
-
-        <div className="search-results">
-            {
-                noInput ? null : (!searchResults.length ? <div className="mt-3 no-results">No results</div> : searchResults.map((item, i) => {
-                    return <ListItem key={i} 
-                        id={item.id}
-                        title={item.title || item.name}
-                        release={item.release}
-                        overview={item.overview}
-                        knownFor={item.known_for}
-                        knownForDept={item.known_for_department}
+            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+                <Tab eventKey="profile" title="Movies">
+                    <input type="text" placeholder="search movies..." 
+                    onChange={handleMovieSearch} ref={searchRef}
+                    />   
+                </Tab>
+                <Tab eventKey="home" title="People">
+                    <input type="text" placeholder="search people..." 
+                    onChange={handlePeopleSearch} ref={searchRef}
                     />
-                }))
-            }
+                </Tab>
+                <Tab eventKey="contact" title="TV" >
+                <input type="text" placeholder="search series..." 
+                    onChange={handleTVSearch} ref={searchRef}
+                    />
+                </Tab>
+            </Tabs>
 
-        </div>
+            <div className="search-results">
+                {
+                    noInput ? null : (!searchResults.length ? <div className="mt-3 no-results">No results</div> : searchResults.map((item, i) => {
+                        return <ListItem key={i}
+                            movie={item.movie}
+                            series={item.series} 
+                            id={item.id}
+                            title={item.title}
+                            name={item.name}
+                            release={item.release}
+                            overview={item.overview}
+                            knownFor={item.known_for}
+                            knownForDept={item.known_for_department}
+                        />
+                    }))
+                }
+
+            </div>
         </div>
     )
 }

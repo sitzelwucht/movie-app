@@ -1,9 +1,91 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link, withRouter, useHistory } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
+import axios from 'axios'
 
-export default function Person() {
+function Person(props) {
+
+    const history = useHistory();
+    const [person, setPerson] = useState()
+
+    const [hide, setHide] = useState(false)
+    const [showFull, setShowFull] = useState(false)
+    const getPerson = async () => {
+
+        const response = await axios.get(`https://api.themoviedb.org/3/person/${props.id}?api_key=${process.env.REACT_APP_API_KEY}`)
+        const person = await response.data
+        setPerson({
+            movie: false,
+            name: person.name,
+            bio: person.biography,
+            birthday: person.birthday,
+            death: person.deathday,
+            placeOfBirth: person.place_of_birth,
+            imdbId: person.imdb_id
+        })
+
+    }
+
+    useEffect(() => {
+        getPerson()
+    }, [props])
+
+
     return (
-        <div>
+        <>
+        <div className="movie-box">
+
+        { person && <>
+        
+            <div >
+                <h2>{person.name}</h2>
+            </div>
+
+            <div className="reversed">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td className="bold">Date of Birth:</td>
+                            <td className="indent">{person.birthday ? person.birthday : 'N/A'}</td>
+                        </tr>
+                        {
+                            person.death ?
+                            <tr>
+                            <td className="bold">Died:</td>
+                            <td className="indent">{person.death}</td>
+                            </tr> : null
+                        }
+                        <tr>
+                            <td className="bold">Place of birth:</td>
+                            <td className="indent">{person.placeOfBirth ? person.placeOfBirth : 'N/A'}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
             
+            { person.bio &&
+                <div>
+
+                {
+                    showFull ? 
+                    <>{person.bio} <Button variant="link" onClick={() => setShowFull(false)}>show less</Button></> : 
+                    <> {person.bio.substr(0, 400)} <Button variant="link" onClick={() => setShowFull(true)}>show more</Button></>
+
+                }
+            </div>
+        
+            
+            }
+        
+            </>
+        }
+
         </div>
+    </>
     )
 }
+
+
+export default withRouter(Person)
