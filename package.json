@@ -1,6 +1,8 @@
 {
   "name": "movie-app",
   "version": "1.0.0",
+  "private": true,
+  "homepage": "https://sitzelwucht.github.io/movie-app/",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,5 +17,7 @@
   "bugs": {
     "url": "https://github.com/sitzelwucht/movie-app/issues"
   },
-  "homepage": "https://github.com/sitzelwucht/movie-app#readme"
+  "dependencies": {
+    "gh-pages": "^3.2.0"
+  }
 }
