@@ -19,9 +19,16 @@ footer {
   bottom: 0;
 }
 
+footer > div {
+  margin: 10px;
+}
+.footer-btns {
+  text-align: center;
+}
 footer button {
   color: rgba(250, 177, 41, 0.966)!important;
   text-decoration: none!important;
+  margin: 5px auto;
 }
 
 h1 {
@@ -101,10 +108,13 @@ input::placeholder {
 
 .nav-tabs a {
   color: rgb(255, 165, 62)!important;
-  font-size:2em!important
+  font-size:2em!important;
 }
 .nav-tabs {
   border: none!important;
+}
+.nav-link {
+  transition: all .5s ease-in;
 }
 .nav-link.active {
   background: rgba(78, 78, 78, 0.521)!important;
@@ -188,6 +198,16 @@ input::placeholder {
   font-size: .8em;
   margin-top: 15px;
   padding: 20px;
+  transition: all .4s ease-in;
+}
+.list-item:hover {
+  background: rgba(200,200,200,.1)
+}
+.list-item a {
+  transition: all .3s ease-in;
+}
+.list-item a:hover {
+  color: rgb(190, 101, 29);
 }
 .list-item 
 .search-results {
@@ -230,18 +250,19 @@ input::placeholder {
   background: rgba(20,20,20, .5);
   color: white
 }
-::-webkit-scrollbar-track
-{
+
+#credits li {
+  display: block;
+}
+::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-::-webkit-scrollbar
-{
+::-webkit-scrollbar {
   width: 15px;
   background-color: transparent;
 }
-::-webkit-scrollbar-thumb
-{
+::-webkit-scrollbar-thumb {
   background-color: rgba(160, 160, 160, 0.432);
 }
 

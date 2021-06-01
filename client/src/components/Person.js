@@ -7,6 +7,7 @@ function Person(props) {
 
     const history = useHistory();
     const [person, setPerson] = useState()
+    const [credits, setCredits] = useState()
 
     const [hide, setHide] = useState(false)
     const [showFull, setShowFull] = useState(false)
@@ -15,7 +16,7 @@ function Person(props) {
 
         const response = await axios.get(`https://api.themoviedb.org/3/person/${props.id}?api_key=${process.env.REACT_APP_API_KEY}`)
         const person = await response.data
-        console.log(person)
+
         setPerson({
             movie: false,
             name: person.name,
@@ -24,13 +25,25 @@ function Person(props) {
             death: person.deathday,
             placeOfBirth: person.place_of_birth,
             imdbId: person.imdb_id,
-            img: person.profile_path
+            img: person.profile_path,
+
         })
 
     }
 
+    const getCredits = async () => {
+        const response = await axios.get(`https://api.themoviedb.org/3/person/${props.id}/movie_credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
+        const data = await response.data.cast
+    
+        const credits = data.map((item) => {
+            return {id: item.id, title: item.original_title}
+        })
+        setCredits(credits)
+    }
+
     useEffect(() => {
         getPerson()
+        getCredits()
     }, [props])
 
 
@@ -84,6 +97,17 @@ function Person(props) {
                 }
             </div>
             }
+            <div><ul id="credits"><span className="bold">Credits:</span>
+
+            { credits && credits.map((item, i) => {
+                return <li key={i}><Link to={`/movie/${item.id}`}>{item.title}</Link></li>
+            })
+            }
+            </ul>
+            </div>
+
+
+
             </>
         }
         </div>

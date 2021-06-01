@@ -15,7 +15,6 @@ function App() {
 
 
   const handleMinimize = () => {
-    alert('h')
     setMinimize(true)
   }
 

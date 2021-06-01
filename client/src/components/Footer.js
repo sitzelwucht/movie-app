@@ -6,9 +6,8 @@ export default function Footer() {
   
         <footer className="p-3">
 
-            {/* <div className="d-flex flex-column mb-5 align-items-center"> */}
             <div className="footer-btns">
-                <div><Button variant="link" className="mb-3">create account</Button></div>
+                <div><Button variant="link">create account</Button></div>
                 <div><Button variant="link">log in</Button></div>
             </div>
 
