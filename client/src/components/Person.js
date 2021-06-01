@@ -12,8 +12,8 @@ function Person(props) {
     const [hide, setHide] = useState(false)
     const [showFull, setShowFull] = useState(false)
 
-    const getPerson = async () => {
 
+    const getPerson = async () => {
         const response = await axios.get(`https://api.themoviedb.org/3/person/${props.id}?api_key=${process.env.REACT_APP_API_KEY}`)
         const person = await response.data
 
@@ -31,6 +31,7 @@ function Person(props) {
 
     }
 
+
     const getCredits = async () => {
         const response = await axios.get(`https://api.themoviedb.org/3/person/${props.id}/movie_credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
         const data = await response.data.cast
@@ -40,6 +41,7 @@ function Person(props) {
         })
         setCredits(credits)
     }
+
 
     useEffect(() => {
         getPerson()
@@ -78,7 +80,7 @@ function Person(props) {
                             </tr> : null
                         }
                         <tr>
-                            <td className="bold">Place of birth:</td>
+                            <td className="bold">Place of Birth:</td>
                             <td className="indent">{person.placeOfBirth ? person.placeOfBirth : 'N/A'}</td>
                         </tr>
 

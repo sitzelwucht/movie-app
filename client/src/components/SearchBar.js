@@ -138,8 +138,7 @@ export default function SearchBar(props) {
                 </Tab>
             </Tabs>
 
-
-                <div className="search-results">
+                <div className={props.mini ? "search-results" : "hidden"}>
                     {
                         noInput ? null : (!searchResults.length ? <div className="no-results">No results</div> : searchResults.map((item, i) => {
                             return <ListItem key={i}

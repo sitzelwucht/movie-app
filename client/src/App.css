@@ -77,7 +77,9 @@ ul a:hover {
 .bold {
   font-weight: bold;
 }
-
+.hidden {
+  display: none;
+}
 .form-control {
   font-family: 'Inconsolata';
   font-size: 1.2em;
@@ -151,10 +153,7 @@ input::placeholder {
   display: flex;
   justify-content: space-evenly;
 }
-.intro-container {
-  background: rgba(0, 0, 0, 0.342);
-  width: 13vw;
-}
+
 .welcome-logo {
   display: flex;
   flex-direction: column;
@@ -283,9 +282,6 @@ input::placeholder {
     flex-direction: column;
   }
 
-  .intro-container {
-    height: 200px;
-  }
   .logo-small {
     display: flex;
     flex-direction: row-reverse;

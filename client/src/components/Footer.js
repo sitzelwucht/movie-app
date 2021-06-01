@@ -6,10 +6,10 @@ export default function Footer() {
   
         <footer className="p-3">
 
-            <div className="footer-btns">
+            {/* <div className="footer-btns">
                 <div><Button variant="link">create account</Button></div>
                 <div><Button variant="link">log in</Button></div>
-            </div>
+            </div> */}
 
             <div>
                 Powered by <a href="https://themoviedb.org" 

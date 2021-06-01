@@ -11,8 +11,9 @@ export default function Landing(props) {
 
     return (
         <div className={props.mini ? "mini" : "main-container"}>
+
             <IntroLogo mini={props.mini} />
-            <SearchBar handleMinimize={props.handleMinimize}/>
+            <SearchBar handleMinimize={props.handleMinimize} mini={props.mini}/>
             
             <Route path="/movie/:id" render={(routeProps) => {
                 return <SingleMovie 
