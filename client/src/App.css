@@ -230,6 +230,11 @@ input::placeholder {
   max-height: 80vh;
   overflow-y: auto;
 }
+#bio {
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  font-size: 18px;
+}
 .buttons {
   padding: 0;
 }

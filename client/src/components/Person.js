@@ -89,13 +89,11 @@ function Person(props) {
             </div>
 
             { person.bio &&
-                <div>
-
+                <div id={!showFull && "bio"}>
                 {
                     showFull ? 
                     <> {person.bio} <Button variant="link" onClick={() => setShowFull(false)}>show less</Button></> : 
                     <> {person.bio.substr(0, 400)} <Button variant="link" onClick={() => setShowFull(true)}>show more</Button></>
-
                 }
             </div>
             }
