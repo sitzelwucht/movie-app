@@ -223,7 +223,7 @@ input::placeholder {
 .movie-box {
   background: rgba(180,180,180,.2);
   color: white;
-  width: 45%;
+  width: 55%;
   margin: 75px 50px;
   backdrop-filter: blur(10px);
   min-height: 80vh;
@@ -270,11 +270,17 @@ input::placeholder {
   background-color: rgba(160, 160, 160, 0.432);
 }
 
+@media screen and (max-width: 1400px) {
 
-@media screen and (max-width: 800px) {
+  .movie-box {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
   
   .page {
-    width: 100%;
+    width: 80%;
   }
   .main-container {
     width: 100%;

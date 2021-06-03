@@ -15,7 +15,7 @@ export default function ListItem(props) {
             </div>
             {
                 props.title ? (props.overview? <div>{props.overview.substr(0,150)}...</div> : null) : <div>Known For: <ul>{props.knownFor.map((item, i) => {
-                    return <li key={i}>{item.original_title}</li>
+                    return <Link to={`/movie/${item.id}`}><li key={i}>{item.original_title}</li></Link>
                 })}</ul></div>
             }
         </div>
