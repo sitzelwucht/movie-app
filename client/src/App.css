@@ -131,6 +131,7 @@ input::placeholder {
   display: flex;
   width: 85%;
   margin: auto;
+  backdrop-filter: blur(5px);
 }
 
 .main-container {
@@ -140,14 +141,11 @@ input::placeholder {
   align-items: center;
   background: rgba(50,50,50,.2);
   margin: auto;
-  /* max-height: 100vh;
-  min-height: 100vh!important; */
   backdrop-filter: blur(6px);
-  width: 70vw;
+  /* width: 70vw; */
 }
 
 .mini {
-  width: 70vw;
   background: rgba(50,50,50,.2);
   margin: auto;
   display: flex;
@@ -280,36 +278,35 @@ input::placeholder {
 @media screen and (max-width: 1200px) {
   
   .page {
-    width: 80%;
+    width: 85%;
   }
   .main-container {
     width: 100%;
     flex-direction: column;
   }
-
   .mini {
     width: 100%;
     display: flex;
     flex-direction: column;
   }
-
   .logo-small {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     justify-content: flex-end;
   }
-
   .welcome-logo img {
-    height: 120px;
+    height: 100px;
   }
   .logo-small {
-    height: 180px;
+    transform: scale(0.4);
+  }
+  .nav-tabs {
+    transform: scale(.7);
   }
   .search {
     margin: auto;
   }
-
   .search-results {
     height: 30vh;
     font-size: 18px;
@@ -317,16 +314,11 @@ input::placeholder {
   }
   .movie-box {
     width: 90%;
-    margin-top: 0;
-    margin-bottom: 100px;
+    margin: 10px auto 100px auto;
   }
-  .movie-box > div{
-    margin: 0;
-    width: 100%;
-  }
-
   footer {
     background: rgba(50, 50, 50, 0.247);
+    color: white;
     justify-content: space-between;
     display: flex;
     position: fixed;
@@ -335,8 +327,8 @@ input::placeholder {
     bottom: 0;
     backdrop-filter: blur(5px);
   }
-
   .footer-btns {
     display: flex;
   }
+  
 }
