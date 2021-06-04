@@ -88,15 +88,22 @@ function Person(props) {
                 </table>
             </div>
 
-            { person.bio &&
+            { person.bio && <>
                 <div id={!showFull && "bio"}>
                 {
                     showFull ? 
-                    <> {person.bio} <Button variant="link" onClick={() => setShowFull(false)}>show less</Button></> : 
-                    <> {person.bio.substr(0, 400)} <Button variant="link" onClick={() => setShowFull(true)}>show more</Button></>
+                    <> {person.bio} </> : 
+                    <> {person.bio.substr(0, 400)} </>
                 }
             </div>
+            {
+               showFull ? <Button variant="dark" className="border m-5 mt-1" onClick={() => setShowFull(false)}>show less</Button> : 
+               <Button variant="dark" className="border mx-5 mt-1" onClick={() => setShowFull(true)}>show more</Button>
+            
+            }   
+            </>
             }
+
             <div><ul id="credits"><span className="bold">Credits:</span>
 
             { credits && credits.map((item, i) => {
