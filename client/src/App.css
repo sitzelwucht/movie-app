@@ -281,6 +281,9 @@ input::placeholder {
   background: rgba(20,20,20, .5);
   color: white
 }
+.uppercase {
+  text-transform: uppercase;
+}
 
 .veryhigh {
   color: rgb(26, 126, 87)

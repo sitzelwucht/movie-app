@@ -100,77 +100,82 @@ function SingleMovie(props) {
 
                 <div className="reversed d-flex justify-content-between align-items-center">
 
+                <div className="d-flex flex-column">
                     <div>
                         <h2>{movie.title} ({movie.release_date.substr(0,4)})</h2>
                         { movie.title !== movie.original_title && <h4>{movie.original_title} </h4>}
-                        <div>{movie.production_countries.map((item, i) => {
+                        <div className="uppercase">{movie.production_countries.map((item, i) => {
                                             return <li>{item.name}</li>
                                         })}</div>
                         { movie.tagline && <h6 className="mt-5">{movie.tagline}</h6> }
 
-                        </div>
+                    </div>
+
+                    <div className="mt-5">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td className="bold">Genre:</td>
+                                <td className="indent">
+                                    {
+                                        <ul>
+                                    {
+                                    movie.genres.length ? movie.genres.map((item, i) => {
+                                            return <li>{item.name}</li>
+                                        }) : <li>N/A</li>
+                                    }
+                                    </ul>
+                                    }</td>
+                                </tr>
+                                <tr>
+                                    <td className="bold">Release:</td>
+                                    <td className="indent">{new Date(movie.release_date).toDateString()}</td>
+                                </tr>
+                                <tr>
+                                    <td className="bold">Runtime:</td>
+                                    <td className="indent">{movie.runtime} mins</td>
+                                </tr>
+                                <tr>
+                                    <td className="bold">Rating:</td>
+                                    {/* <td className="indent">
+                                    {   avgRating ? <>
+                                        <span className={color}>{avgRating} </span>
+                                        /10 <span>({movie.vote_count} votes</span>)</> : 'N/A'
+                                    }
+                                    </td> */}
+
+                                    {
+                                        !movie.vote_average ? <td className="indent">N/A</td> :
+                                        <td className="indent">
+                                        {movie.vote_average >= 9 && <span className="veryhigh bold">{movie.vote_average}</span> }  
+                                        {movie.vote_average >= 8 && movie.vote_average< 9 && <span className="high bold">{movie.vote_average}</span> }
+                                        {movie.vote_average >= 7 && movie.vote_average < 8 && <span className="above-medium bold">{movie.vote_average}</span> }  
+                                        {movie.vote_average >= 6 && movie.vote_average < 7 && <span className="medium bold">{movie.vote_average}</span> }  
+                                        {movie.vote_average >= 5 && movie.vote_average < 6 && <span className="below-medium bold">{movie.vote_average}</span> }  
+                                        {movie.vote_average >= 4 && movie.vote_average < 5 && <span className="low bold">{movie.vote_average}</span> }    
+                                        {movie.vote_average <= 3 && movie.vote_average < 4 && <span className="verylow bold">{movie.vote_average}</span> }  
+                                        /10 <span>({movie.vote_count} votes</span>)
+                                        </td>
+                                        
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                     <div><img src={`http://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt="poster" /></div>
                     
                 </div>
                
                 <div>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td className="bold">Genre:</td>
-                            <td className="indent">
-                                {
-                                    <ul>
-                                {
-                                movie.genres.length ? movie.genres.map((item, i) => {
-                                        return <li>{item.name}</li>
-                                    }) : <li>N/A</li>
-                                }
-                                </ul>
-                                }</td>
-                            </tr>
-                            <tr>
-                                <td className="bold">Release:</td>
-                                <td className="indent">{new Date(movie.release_date).toDateString()}</td>
-                            </tr>
-                            <tr>
-                                <td className="bold">Runtime:</td>
-                                <td className="indent">{movie.runtime} mins</td>
-                            </tr>
-                            <tr>
-                                <td className="bold">Rating:</td>
-                                {/* <td className="indent">
-                                {   avgRating ? <>
-                                    <span className={color}>{avgRating} </span>
-                                    /10 <span>({movie.vote_count} votes</span>)</> : 'N/A'
-                                }
-                                </td> */}
 
-                                {
-                                    !movie.vote_average ? <td className="indent">N/A</td> :
-                                    <td className="indent">
-                                    {movie.vote_average >= 9 && <span className="veryhigh bold">{movie.vote_average}</span> }  
-                                    {movie.vote_average >= 8 && movie.vote_average< 9 && <span className="high bold">{movie.vote_average}</span> }
-                                    {movie.vote_average >= 7 && movie.vote_average < 8 && <span className="above-medium bold">{movie.vote_average}</span> }  
-                                    {movie.vote_average >= 6 && movie.vote_average < 7 && <span className="medium bold">{movie.vote_average}</span> }  
-                                    {movie.vote_average >= 5 && movie.vote_average < 6 && <span className="below-medium bold">{movie.vote_average}</span> }  
-                                    {movie.vote_average >= 4 && movie.vote_average < 5 && <span className="low bold">{movie.vote_average}</span> }    
-                                    {movie.vote_average <= 3 && movie.vote_average < 4 && <span className="verylow bold">{movie.vote_average}</span> }  
-                                     /10 <span>({movie.vote_count} votes</span>)
-                                    </td>
-                                    
-                                }
-                            </tr>
-                        </tbody>
-                    </table>
+                <div>{movie.overview}</div>
+                
+                   
                 </div>
                 
+
                 <div className="reversed">
-                
-        
-                    <div>{movie.overview}</div>
-                </div>
-                <div>
                     { similar.length > 0 && <h5>Similar movies: </h5> }
                     <ul>
                     {

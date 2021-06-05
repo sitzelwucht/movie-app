@@ -59,6 +59,26 @@ function Person(props) {
             
                 <div >
                     <h2>{person.name}</h2>
+                    <table className="mt-5">
+                        <tbody>
+                            <tr>
+                                <td className="bold">Date of Birth:</td>
+                                <td className="indent">{person.birthday ? person.birthday : 'N/A'}</td>
+                            </tr>
+                            {
+                                person.death ?
+                                <tr>
+                                <td className="bold">Died:</td>
+                                <td className="indent">{person.death}</td>
+                                </tr> : null
+                            }
+                            <tr>
+                                <td className="bold">Place of Birth:</td>
+                                <td className="indent">{person.placeOfBirth ? person.placeOfBirth : 'N/A'}</td>
+                            </tr>
+
+                        </tbody>
+                </table>
                 </div>
                 <div>
                    { person.img && <img src={`http://image.tmdb.org/t/p/w200/${person.img}`} alt="profile" />} 
@@ -66,28 +86,6 @@ function Person(props) {
             </div>
 
             <div className="reversed">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td className="bold">Date of Birth:</td>
-                            <td className="indent">{person.birthday ? person.birthday : 'N/A'}</td>
-                        </tr>
-                        {
-                            person.death ?
-                            <tr>
-                            <td className="bold">Died:</td>
-                            <td className="indent">{person.death}</td>
-                            </tr> : null
-                        }
-                        <tr>
-                            <td className="bold">Place of Birth:</td>
-                            <td className="indent">{person.placeOfBirth ? person.placeOfBirth : 'N/A'}</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-
             { person.bio && <>
                 <div id={!showFull && "bio"}>
                 {
@@ -103,6 +101,9 @@ function Person(props) {
             }   
             </>
             }
+            </div>
+
+          
 
             <div><ul id="credits"><span className="bold">Credits:</span>
 
