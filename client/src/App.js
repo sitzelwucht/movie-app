@@ -11,7 +11,8 @@ function App() {
 
   const [minimize, setMinimize] = useState(false)
   const [loggedInUser, setLoggedInUser] = useState()
-  const [error, setError] = useState(null)
+  const [successAlert, setSuccessAlert] = useState(null)
+  const [errorAlert, setErrorAlert] = useState(null)
 
 
   const handleLogin = (e) => {
@@ -21,8 +22,9 @@ function App() {
     axios.post(`${config.API_URL}/api/login`, user, {withCredentials: true})
     .then(response => {
       setLoggedInUser(response.data)
+      setSuccessAlert('Login successful')
     })
-    .catch(err => setError(err.response.data.errorMsg))
+    .catch(err => setErrorAlert(err.response.data.errorMsg))
   }
 
 
@@ -35,8 +37,11 @@ function App() {
     }
 
     axios.post(`${config.API_URL}/api/register`, newUser)
-    .then(response => setLoggedInUser(response.data))
-    .catch(err => setError(Object.values(err.response.data)[0]))
+    .then(response => {
+      setLoggedInUser(response.data)
+      setSuccessAlert('Registration successful! You can now log in')
+    })
+    .catch(err => setErrorAlert(Object.values(err.response.data)[0]))
   }
 
 
@@ -87,6 +92,8 @@ function App() {
     <Footer 
       onSignup={handleSignup}
       onLogin={handleLogin}
+      errorMsg={errorAlert}
+      successMsg={successAlert}
         
     />
     </>

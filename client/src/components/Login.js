@@ -1,10 +1,11 @@
 import React from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import { Modal, Button, Form, Alert } from 'react-bootstrap'
 
 
 export default function Login(props) {
     return (
         <div>
+
              <Modal
                 {...props}
                 aria-labelledby="contained-modal-title-vcenter"
@@ -16,20 +17,25 @@ export default function Login(props) {
                     <Button variant="outline-light" onClick={props.onHide}>x</Button>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>username</Form.Label>
-                        <Form.Control type="text" name="username" placeholder="Enter email" />
-                    </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" name="password" placeholder="Password" />
-                    </Form.Group>
+                
+                { props.successMsg && <Alert variant="success">{props.successMsg}</Alert>}
+                { props.errorMsg && <Alert variant="danger">{props.errorMsg}</Alert>}
 
-                    <Button variant="warning" type="submit" className="mt-3">
-                        Submit
-                    </Button>
+                    <Form onSubmit={props.onLogin}>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>username</Form.Label>
+                            <Form.Control type="text" name="username" placeholder="Enter email" />
+                        </Form.Group>
+
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" name="password" placeholder="Password" />
+                        </Form.Group>
+
+                        <Button variant="warning" type="submit" className="mt-3">
+                            Submit
+                        </Button>
                     </Form>
                 </Modal.Body>
             </Modal>

@@ -1,10 +1,14 @@
 import React from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import { Modal, Button, Form, Alert } from 'react-bootstrap'
 
 
 export default function Signup(props) {
+
+
+
     return (
         <div>
+
              <Modal
                 {...props}
                 aria-labelledby="contained-modal-title-vcenter"
@@ -17,25 +21,28 @@ export default function Signup(props) {
                 </Modal.Header>
                 <Modal.Body>
 
-                    <Form onSubmit={props.handleSignup}>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>username</Form.Label>
-                        <Form.Control type="text" name="username" placeholder="Enter username" />
-                    </Form.Group>
+                { props.successMsg && <Alert variant="success">{props.successMsg}</Alert>}
+                { props.errorMsg && <Alert variant="danger">{props.errorMsg}</Alert>}
 
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" name="password" placeholder="Password" />
-                    </Form.Group>
+                    <Form onSubmit={props.onSignup}>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>username</Form.Label>
+                            <Form.Control type="text" name="username" placeholder="Enter username" />
+                        </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword2">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" name="password2" placeholder="Confirm password" />
-                    </Form.Group>
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" name="password" placeholder="Password" />
+                        </Form.Group>
 
-                    <Button variant="warning" type="submit" className="mt-3">
-                        Submit
-                    </Button>
+                        <Form.Group controlId="formBasicPassword2">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" name="password2" placeholder="Confirm password" />
+                        </Form.Group>
+
+                        <Button variant="warning" type="submit" className="mt-3">
+                            Submit
+                        </Button>
                     </Form>
 
                 </Modal.Body>

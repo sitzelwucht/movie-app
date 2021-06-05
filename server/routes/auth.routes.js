@@ -24,7 +24,7 @@ router.get('/user', isLoggedIn, (req, res, next) => {
 router.post('/register', (req, res) => {
     const { username, password, passwordConf} = req.body
 
-    if(!username || password || passwordConf ) {
+    if(!username || !password || !passwordConf ) {
         res.status(500).json({errorMessage: 'Please fill out all fields'})
     }
     if(password !== passwordConf) {
@@ -38,7 +38,7 @@ router.post('/register', (req, res) => {
     .then(user => res.status(200).json(user))
     .catch(err => {
         if (err.code === 11000) {
-            res.status(500).json({errorMsg: 'Email already in use'})
+            res.status(500).json({errorMsg: 'username is already taken'})
         }
         else {
             res.status(500).json({errorMsg: 'Something went wrong'})
@@ -64,7 +64,7 @@ router.post('/login', (req, res) => {
             }
         })
         .catch(() => {
-            res.status(500).json({ errorMsg: 'Invalid email format'})
+            res.status(500).json({ errorMsg: 'Invalid format'})
             return
         })
     })

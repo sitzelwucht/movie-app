@@ -155,9 +155,7 @@ input::placeholder {
   background: rgba(80, 80, 80, 0.185)!important;
   backdrop-filter: blur(15px);
 }
-.modal div {
-  background: transparent;
-}
+
 .page {
   display: flex;
   width: 85%;

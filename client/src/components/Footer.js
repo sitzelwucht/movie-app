@@ -33,12 +33,16 @@ export default function Footer(props) {
             show={signupModalShow} 
             onHide={() => setSignupModalShow(false)}
             onSignup={props.onSignup}
+            errorMsg={props.errorMsg}
+            successMsg={props.successMsg}
              />
 
             <Login 
             show={loginModalShow} 
             onHide={() => setLoginModalShow(false)}
-            onLogin={props.onLogin}    
+            onLogin={props.onLogin}
+            errorMsg={props.errorMsg}
+            successMsg={props.successMsg}
             />
             
             </div>
