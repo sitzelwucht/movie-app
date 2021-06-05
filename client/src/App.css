@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Fredoka+One&family=Inconsolata&family=Lobster&display=swap');
 
 body {
-  /* background: rgb(4, 4, 65); */
   background: url('pexels-tima-miroshnichenko-7991436.jpg') no-repeat center bottom;
   background-attachment: fixed;
   max-height: 100vh;
@@ -15,22 +14,33 @@ input:focus, input.form-control:focus {
   -webkit-box-shadow: none;
 }
 footer {
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  color: rgba(255, 255, 255, 0.404);
+  bottom: 0vh;
+  width: 100vw;
+  height: 100px;
+  background: rgba(80, 80, 80, 0.274);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 footer > div {
-  margin: 10px;
+  margin: 0 10px;
 }
 .footer-btns {
   text-align: center;
 }
 footer button {
-  color: rgba(250, 177, 41, 0.966)!important;
+  color: rgba(250, 177, 41, 0.76)!important;
   text-decoration: none!important;
   margin: 5px auto;
+  border-radius: 15px!important;
 }
-
+footer button:hover {
+  color: rgb(250, 177, 41)!important;
+  background: rgba(250, 177, 41, 0.123)!important;
+}
 h1 {
   font-family: 'Fredoka One';
   color: orange;
@@ -126,7 +136,16 @@ input::placeholder {
   background: rgba(220,220,220,.3)!important;
   border: none!important
 }
-
+.modal form {
+  text-align: center;
+}
+.modal input {
+  background: rgba(255, 189, 89, 0.788);
+  margin: 5px auto;
+}
+.modal input:focus {
+  background: rgb(253, 172, 51);
+} 
 .page {
   display: flex;
   width: 85%;
@@ -252,6 +271,32 @@ input::placeholder {
   background: rgba(20,20,20, .5);
   color: white
 }
+
+.veryhigh {
+  color: rgb(7, 105, 7)
+}
+.high {
+  color: rgb(21, 165, 21)
+}
+.above-medium {
+  color: rgb(121, 207, 50)
+}
+.medium {
+  color: rgb(226, 223, 38)
+}
+.below-medium {
+  color: rgb(235, 206, 75)
+}
+.low {
+  color: rgb(235, 147, 75)
+}
+.verylow {
+  color: rgb(245, 52, 52)
+}
+
+
+
+
 
 #credits li {
   display: block;

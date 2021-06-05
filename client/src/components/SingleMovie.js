@@ -7,6 +7,8 @@ function SingleMovie(props) {
 
     const history = useHistory();
     const [movie, setMovie] = useState()
+    const [avgRating, setAvgRating] = useState()
+    const [color, setColor] = useState()
     const [similar, setSimilar] = useState([])
 
     const [hide, setHide] = useState(false)
@@ -32,6 +34,8 @@ function SingleMovie(props) {
         vote_average: movie.vote_average,
         vote_count: movie.vote_count
         })
+
+        setAvgRating(movie.vote_average)
     }
 
     const getSimilarMovies = async () => {
@@ -41,19 +45,50 @@ function SingleMovie(props) {
 
     }
 
+    // show rating in a different color depending on the value
+    const getRatingColor = () => {
+        
+        if (avgRating >= 9 ) {
+            setColor('veryhigh bold')
+        }
+        else if (avgRating >= 8 && avgRating < 9 ) {
+            setColor('high bold')
+        }
+        else if (avgRating >= 7 && avgRating < 8 ) {
+            setColor('above-medium bold')
+        }
+        else if (avgRating >= 6 && avgRating < 7 ) {
+            setColor('medium bold')
+        }
+        else if (avgRating >= 5 && avgRating < 6 ) {
+            setColor('below-medium bold')
+        }
+        else if (avgRating >= 4 && avgRating < 5 ) {
+            setColor('low bold')
+        }
+        else if (avgRating >= 3 ) {
+            setColor('verylow bold')
+        }
+        
+    }
 
     useEffect(() => {
         getMovie()
         getSimilarMovies()
         setHide(false)
+        getRatingColor()
     }, [props])
 
 
+    useEffect(() => {
+        getRatingColor()
+    }, [])
+
+    
     return (
         <>
         {
            !hide && <div className="movie-box">
-     
             { movie && <>
                 <div id="buttons">
                     <div className="d-flex justify-content-between">
@@ -103,7 +138,12 @@ function SingleMovie(props) {
                             </tr>
                             <tr>
                                 <td className="bold">Rating:</td>
-                                <td className="indent">{movie.vote_average}/10 <span>({movie.vote_count} votes</span>)</td>
+                                <td className="indent">
+                                {   avgRating ? <>
+                                    <span className={color}>{avgRating} </span>
+                                    /10 <span>({movie.vote_count} votes</span>)</> : 'N/A'
+                                }
+                                </td>
                             </tr>
                         </tbody>
                     </table>
