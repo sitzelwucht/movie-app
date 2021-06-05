@@ -8,14 +8,14 @@ export default function SingleSeries(props) {
 
     const history = useHistory();
     const [series, setSeries] = useState()
-    const [similar, setSimilar] = useState([])
+
 
     const [hide, setHide] = useState(false)
 
     const getSeries = async () => {
         const response = await axios.get(`https://api.themoviedb.org/3/tv/${props.id}?api_key=${process.env.REACT_APP_API_KEY}`)
         const series = await response.data
-        console.log(series)
+
         setSeries({
         first_air_date: series.first_air_date,
         genre_ids: series.genre_ids,
@@ -32,17 +32,9 @@ export default function SingleSeries(props) {
         })
     }
 
-    const getSimilarSeries = async () => {
-        const response = await axios.get(`https://api.themoviedb.org/3/tv/${props.id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`)
-        const similarSeries = await response.data
-        setSimilar(similarSeries.results)
-
-    }
-
 
     useEffect(() => {
         getSeries()
-        getSimilarSeries()
         setHide(false)
     }, [props])
 
@@ -80,7 +72,21 @@ export default function SingleSeries(props) {
                             </tr>
                             <tr>
                                 <td className="bold">Rating:</td>
-                                <td className="indent">{series.vote_average}/10 <span>({series.vote_count} votes</span>)</td>
+                                {
+                                    !series.vote_average ? <td className="indent">'N/A'</td> :
+                                    <td className="indent">
+                                    {series.vote_average >= 9 && <span className="veryhigh bold">{series.vote_average}</span> }  
+                                    {series.vote_average >= 8 && series.vote_average< 9 && <span className="high bold">{series.vote_average}</span> }
+                                    {series.vote_average >= 7 && series.vote_average < 8 && <span className="above-medium bold">{series.vote_average}</span> }  
+                                    {series.vote_average >= 6 && series.vote_average < 7 && <span className="medium bold">{series.vote_average}</span> }  
+                                    {series.vote_average >= 5 && series.vote_average < 6 && <span className="below-medium bold">{series.vote_average}</span> }  
+                                    {series.vote_average >= 4 && series.vote_average < 5 && <span className="low bold">{series.vote_average}</span> }    
+                                    {series.vote_average <= 3 && series.vote_average < 4 && <span className="verylow bold">{series.vote_average}</span> }  
+                                    /10 <span>({series.vote_count} votes</span>)
+                                    </td>
+
+                                }
+
                             </tr>
                         </tbody>
                     </table>

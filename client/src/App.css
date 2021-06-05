@@ -146,6 +146,18 @@ input::placeholder {
 .modal input:focus {
   background: rgb(253, 172, 51);
 } 
+.modal h2 {
+  font-family: 'Fredoka One';
+  font-size: 2.2em;
+  color: orange
+}
+.modal-body, .modal-header {
+  background: rgba(80, 80, 80, 0.185)!important;
+  backdrop-filter: blur(15px);
+}
+.modal div {
+  background: transparent;
+}
 .page {
   display: flex;
   width: 85%;
@@ -273,25 +285,25 @@ input::placeholder {
 }
 
 .veryhigh {
-  color: rgb(7, 105, 7)
+  color: rgb(26, 126, 87)
 }
 .high {
-  color: rgb(21, 165, 21)
+  color: rgb(27, 173, 27)
 }
 .above-medium {
-  color: rgb(121, 207, 50)
+  color: rgb(165, 207, 50)
 }
 .medium {
-  color: rgb(226, 223, 38)
+  color: rgb(226, 213, 38)
 }
 .below-medium {
-  color: rgb(235, 206, 75)
-}
-.low {
   color: rgb(235, 147, 75)
 }
+.low {
+  color: rgb(228, 106, 58)
+}
 .verylow {
-  color: rgb(245, 52, 52)
+  color: rgb(252, 45, 45)
 }
 
 

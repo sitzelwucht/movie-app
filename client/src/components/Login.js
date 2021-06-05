@@ -12,19 +12,19 @@ export default function Login(props) {
                 centered
                 >
                 <Modal.Header className="d-flex justify-content-between">
-                   <h1>Log in!</h1> 
-                    <Button variant="light" onClick={props.onHide}>x</Button>
+                   <h2>Log in</h2> 
+                    <Button variant="outline-light" onClick={props.onHide}>x</Button>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>username</Form.Label>
-                        <Form.Control type="text" placeholder="Enter email" />
+                        <Form.Control type="text" name="username" placeholder="Enter email" />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control type="password" name="password" placeholder="Password" />
                     </Form.Group>
 
                     <Button variant="warning" type="submit" className="mt-3">

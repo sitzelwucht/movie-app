@@ -82,11 +82,12 @@ function SingleMovie(props) {
 
     useEffect(() => {
         getRatingColor()
-    }, [])
+    }, [avgRating])
 
     
     return (
         <>
+        
         {
            !hide && <div className="movie-box">
             { movie && <>
@@ -130,7 +131,7 @@ function SingleMovie(props) {
                             </tr>
                             <tr>
                                 <td className="bold">Release:</td>
-                                <td className="indent">{movie.release_date}</td>
+                                <td className="indent">{new Date(movie.release_date).toDateString()}</td>
                             </tr>
                             <tr>
                                 <td className="bold">Runtime:</td>
@@ -138,12 +139,27 @@ function SingleMovie(props) {
                             </tr>
                             <tr>
                                 <td className="bold">Rating:</td>
-                                <td className="indent">
+                                {/* <td className="indent">
                                 {   avgRating ? <>
                                     <span className={color}>{avgRating} </span>
                                     /10 <span>({movie.vote_count} votes</span>)</> : 'N/A'
                                 }
-                                </td>
+                                </td> */}
+
+                                {
+                                    !movie.vote_average ? <td className="indent">N/A</td> :
+                                    <td className="indent">
+                                    {movie.vote_average >= 9 && <span className="veryhigh bold">{movie.vote_average}</span> }  
+                                    {movie.vote_average >= 8 && movie.vote_average< 9 && <span className="high bold">{movie.vote_average}</span> }
+                                    {movie.vote_average >= 7 && movie.vote_average < 8 && <span className="above-medium bold">{movie.vote_average}</span> }  
+                                    {movie.vote_average >= 6 && movie.vote_average < 7 && <span className="medium bold">{movie.vote_average}</span> }  
+                                    {movie.vote_average >= 5 && movie.vote_average < 6 && <span className="below-medium bold">{movie.vote_average}</span> }  
+                                    {movie.vote_average >= 4 && movie.vote_average < 5 && <span className="low bold">{movie.vote_average}</span> }    
+                                    {movie.vote_average <= 3 && movie.vote_average < 4 && <span className="verylow bold">{movie.vote_average}</span> }  
+                                     /10 <span>({movie.vote_count} votes</span>)
+                                    </td>
+                                    
+                                }
                             </tr>
                         </tbody>
                     </table>

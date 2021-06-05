@@ -3,7 +3,7 @@ import { Button, Modal } from 'react-bootstrap'
 import Signup from './Signup'
 import Login from './Login'
 
-export default function Footer() {
+export default function Footer(props) {
 
     const [signupModalShow, setSignupModalShow] = useState(false);
     const [loginModalShow, setLoginModalShow] = useState(false);
@@ -29,8 +29,17 @@ export default function Footer() {
                 show={loginModalShow}
                 onClick={() => setLoginModalShow(true)}>log in</Button>
 
-            <Signup show={signupModalShow} onHide={() => setSignupModalShow(false)}/>
-            <Login show={loginModalShow} onHide={() => setLoginModalShow(false)}/>
+            <Signup 
+            show={signupModalShow} 
+            onHide={() => setSignupModalShow(false)}
+            onSignup={props.onSignup}
+             />
+
+            <Login 
+            show={loginModalShow} 
+            onHide={() => setLoginModalShow(false)}
+            onLogin={props.onLogin}    
+            />
             
             </div>
 
