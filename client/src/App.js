@@ -7,7 +7,7 @@ import Footer from './components/Footer'
 import axios from 'axios'
 import config from './config'
 
-function App() {
+function App(props) {
 
   const [minimize, setMinimize] = useState(false)
   const [loggedInUser, setLoggedInUser] = useState()
@@ -45,13 +45,24 @@ function App() {
   }
 
 
+  const handleLogout = () => {
+    axios.post(`${config.API_URL}/api/logout`, {}, { withCredentials: true})
+    .then(setLoggedInUser(null), () => props.history.push('/'))
+  }
 
+  
   const handleMinimize = () => {
     setMinimize(true)
   }
 
 
   useEffect(() => {
+    if (!loggedInUser) {
+      axios.get(`${config.API_URL}/api/user`, { withCredentials: true })
+      .then(response => setLoggedInUser(response.data))
+      .catch(err => console.log(err))
+    }
+
     document.addEventListener('keydown', setMinimize)
 
     return () => {
@@ -62,7 +73,6 @@ function App() {
 
   return (
     <>
-   {/* <div className="mx-auto w-75 d-flex"> */}
     <div className="page">
       <Landing 
       mini={minimize} 
@@ -92,9 +102,10 @@ function App() {
     <Footer 
       onSignup={handleSignup}
       onLogin={handleLogin}
+      onLogout={handleLogout}
       errorMsg={errorAlert}
       successMsg={successAlert}
-        
+      user={loggedInUser}
     />
     </>
   );

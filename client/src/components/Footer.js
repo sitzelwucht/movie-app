@@ -10,7 +10,7 @@ export default function Footer(props) {
 
     return (
   
-        <footer className="p-3">
+        <footer className="d-flex justify-content-between">
 
             <div>
                 Powered by <a href="https://themoviedb.org" 
@@ -19,7 +19,15 @@ export default function Footer(props) {
                 <img src="/themoviedb.svg" height="15" alt="the movie database" />
                 </a>
             </div>
-            
+
+
+        {
+            props.user ? <div className="user-box">
+                <div className="username">{props.user.username}</div> 
+                <div><Button variant="link">▸ watchlist</Button></div>
+                <div><Button variant="link">▸ user settings</Button></div>
+                <div><Button variant="danger" onClick={props.onLogout}>■ Logout</Button></div>
+            </div>:
             <div className="footer-btns">
                 <Button variant="link" 
                 show={signupModalShow}
@@ -29,24 +37,24 @@ export default function Footer(props) {
                 show={loginModalShow}
                 onClick={() => setLoginModalShow(true)}>log in</Button>
 
-            <Signup 
-            show={signupModalShow} 
-            onHide={() => setSignupModalShow(false)}
-            onSignup={props.onSignup}
-            errorMsg={props.errorMsg}
-            successMsg={props.successMsg}
-             />
+                <Signup 
+                show={signupModalShow} 
+                onHide={() => setSignupModalShow(false)}
+                onSignup={props.onSignup}
+                errorMsg={props.errorMsg}
+                successMsg={props.successMsg}
+                />
 
-            <Login 
-            show={loginModalShow} 
-            onHide={() => setLoginModalShow(false)}
-            onLogin={props.onLogin}
-            errorMsg={props.errorMsg}
-            successMsg={props.successMsg}
-            />
-            
+                <Login 
+                show={loginModalShow} 
+                onHide={() => setLoginModalShow(false)}
+                onLogin={props.onLogin}
+                errorMsg={props.errorMsg}
+                successMsg={props.successMsg}
+                />
+                
             </div>
-
+        }
 
         </footer>
       

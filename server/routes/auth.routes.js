@@ -70,4 +70,10 @@ router.post('/login', (req, res) => {
     })
 })
 
+
+router.post('/logout', (req, res) => {
+    req.session.destroy()
+    res.status(204).json({})
+})
+
 module.exports = router
