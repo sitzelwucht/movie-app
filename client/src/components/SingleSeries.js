@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, withRouter, useHistory } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
-
+import SearchBar from './SearchBar'
 
 export default function SingleSeries(props) {
 
@@ -41,6 +41,7 @@ export default function SingleSeries(props) {
 
     return (
         <>
+        
         { !hide && 
         
             <div className="movie-box">

@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { Link, withRouter, useHistory } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+import config from '../config'
 import axios from 'axios'
+import SearchBar from './SearchBar'
 
 function SingleMovie(props) {
 
     const history = useHistory();
     const [movie, setMovie] = useState()
-    const [avgRating, setAvgRating] = useState()
-    const [color, setColor] = useState()
+
     const [similar, setSimilar] = useState([])
 
     const [hide, setHide] = useState(false)
@@ -34,8 +35,6 @@ function SingleMovie(props) {
         vote_average: movie.vote_average,
         vote_count: movie.vote_count
         })
-
-        setAvgRating(movie.vote_average)
     }
 
     const getSimilarMovies = async () => {
@@ -45,70 +44,53 @@ function SingleMovie(props) {
 
     }
 
-    // show rating in a different color depending on the value
-    const getRatingColor = () => {
-        
-        if (avgRating >= 9 ) {
-            setColor('veryhigh bold')
-        }
-        else if (avgRating >= 8 && avgRating < 9 ) {
-            setColor('high bold')
-        }
-        else if (avgRating >= 7 && avgRating < 8 ) {
-            setColor('above-medium bold')
-        }
-        else if (avgRating >= 6 && avgRating < 7 ) {
-            setColor('medium bold')
-        }
-        else if (avgRating >= 5 && avgRating < 6 ) {
-            setColor('below-medium bold')
-        }
-        else if (avgRating >= 4 && avgRating < 5 ) {
-            setColor('low bold')
-        }
-        else if (avgRating >= 3 ) {
-            setColor('verylow bold')
-        }
-        
+    const addToWatchlist = () => {
+        axios.patch(`${config.API_URL}/api/add`, {
+            movie: {id: movie.id, title: movie.title}, 
+            user: props.user.username})
+        .then(response => {
+            console.log(response)
+          })
+        .catch(err => console.log(err))
     }
+
+
 
     useEffect(() => {
         getMovie()
         getSimilarMovies()
-        setHide(false)
-        getRatingColor()
+
     }, [props])
 
 
-    useEffect(() => {
-        getRatingColor()
-    }, [avgRating])
 
     
     return (
         <>
-        
+
         {
            !hide && <div className="movie-box">
+
             { movie && <>
                 <div id="buttons">
+
                     <div className="d-flex justify-content-between">
-                        <Button variant="outline-light" onClick={() => history.goBack()}>˂</Button>
-                        <Button variant="dark" onClick={() => setHide(true)}>X</Button>
+                        <h2>{movie.title} ({movie.release_date.substr(0,4)})</h2>
+                        <Button variant="outline-dark" onClick={addToWatchlist}>+ add to watchlist</Button>
                     </div>
+
+                    { movie.title !== movie.original_title && <h4>{movie.original_title} </h4>}
+                    <div className="uppercase">{movie.production_countries.map((item, i) => {
+                                            return <li>{item.name}</li>
+                                            })}</div>
                 </div>
+
 
                 <div className="reversed d-flex justify-content-between align-items-center">
 
                 <div className="d-flex flex-column">
                     <div>
-                        <h2>{movie.title} ({movie.release_date.substr(0,4)})</h2>
-                        { movie.title !== movie.original_title && <h4>{movie.original_title} </h4>}
-                        <div className="uppercase">{movie.production_countries.map((item, i) => {
-                                            return <li>{item.name}</li>
-                                        })}</div>
                         { movie.tagline && <h6 className="mt-5">{movie.tagline}</h6> }
-
                     </div>
 
                     <div className="mt-5">

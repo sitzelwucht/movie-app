@@ -158,7 +158,7 @@ input::placeholder {
   color: orange
 }
 .modal-body, .modal-header {
-  background: rgba(80, 80, 80, 0.185)!important;
+  background: rgba(182, 182, 182, 0.185)!important;
   backdrop-filter: blur(15px);
 }
 
@@ -182,10 +182,12 @@ input::placeholder {
 
 .mini {
   background: rgba(50,50,50,.2);
+  max-width: 70vw;
   margin: auto;
   display: flex;
   justify-content: space-evenly;
 }
+
 
 .welcome-logo {
   display: flex;
@@ -196,9 +198,14 @@ input::placeholder {
 }
 
 .logo-small {
-  transform: scale(.5);
+  transform: scale(.6);
+  height: 80px;
+  display: flex;
+  justify-content: flex-end;
   transition: all .8s ease-in;
-
+}
+.logo-small img {
+  height: 90px;
 }
 .user-box {
   width: 50%;
@@ -270,8 +277,7 @@ input::placeholder {
 .movie-box {
   background: rgba(180,180,180,.2);
   color: white;
-  width: 55%;
-  margin: 75px 50px;
+  margin: 25px 30px;
   backdrop-filter: blur(10px);
   min-height: 80vh;
   max-height: 80vh;
@@ -328,8 +334,17 @@ input::placeholder {
 }
 
 
-
-
+.watchlist {
+  margin: auto;
+  background: rgba(20,20,20,.4);
+  backdrop-filter: blur(15px);
+}
+.watchlist h3 {
+  font-family: 'Fredoka One';
+  color: orange;
+  letter-spacing: .07em;
+  margin: 15px;
+}
 
 #credits li {
   display: block;

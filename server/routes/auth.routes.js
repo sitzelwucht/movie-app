@@ -16,9 +16,11 @@ const isLoggedIn = (req, res, next) => {
 }
 
 
+
 router.get('/user', isLoggedIn, (req, res, next) => {
     res.status(200).json(req.session.isLoggedInUser)
 })
+
 
 
 router.post('/register', (req, res) => {
@@ -46,6 +48,8 @@ router.post('/register', (req, res) => {
     })
 })
 
+
+
 router.post('/login', (req, res) => {
     const { username, password } = req.body
 
@@ -69,6 +73,37 @@ router.post('/login', (req, res) => {
         })
     })
 })
+
+
+router.get('/watchlist/:user', (req, res) => {
+    let user = req.params.user
+    UserModel.findById({_id: user})
+    .then(response => {
+        res.status(200).json(response)
+    })
+    .catch(err => console.log(err))
+})
+
+
+router.patch('/add/', (req, res) => {
+
+    const { movie, user } = req.body
+
+    UserModel.updateOne({ username: user }, {$push: { watchlist: movie }})
+    .then(response => {
+        res.status(200).json(response)
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: 'Problem occurred',
+            message: err
+        })
+    })
+
+
+
+})
+
 
 
 router.post('/logout', (req, res) => {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, withRouter, useHistory } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
+import SearchBar from './SearchBar'
 
 function Person(props) {
 
@@ -63,7 +64,7 @@ function Person(props) {
                         <tbody>
                             <tr>
                                 <td className="bold">Date of Birth:</td>
-                                <td className="indent">{person.birthday ? person.birthday : 'N/A'}</td>
+                                <td className="indent">{person.birthday ? new Date(person.birthday).toLocaleDateString() : 'N/A'}</td>
                             </tr>
                             {
                                 person.death ?

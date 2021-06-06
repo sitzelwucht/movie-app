@@ -17,7 +17,7 @@ export default function Signup(props) {
                 >
                 <Modal.Header className="d-flex justify-content-between">
                    <h2>Sign up</h2> 
-                    <Button variant="outline-light" onClick={props.onHide}>x</Button>
+                    <Button variant="outline-dark" onClick={props.onHide}>x</Button>
                 </Modal.Header>
                 <Modal.Body>
 

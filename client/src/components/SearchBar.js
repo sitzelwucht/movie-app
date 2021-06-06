@@ -77,7 +77,7 @@ export default function SearchBar(props) {
     const handleTVSearch = async (e) => {
         e.preventDefault()
         let query = e.target.value
-
+        console.log(query)
         if(query) {
             const response = await axios.get(`https://api.themoviedb.org/3/search/tv?query=${query}&api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&include_adult=false`)
         const seriesData = await response.data.results

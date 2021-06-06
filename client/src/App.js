@@ -4,8 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 import Landing from './components/Landing'
 import Footer from './components/Footer'
+// import SingleMovie from './components/SingleMovie'
+import SingleSeries from './components/SingleSeries'
+import Person from './components/Person'
 import axios from 'axios'
 import config from './config'
+// import SearchBar from './components/SearchBar';
+import Watchlist from './components/Watchlist';
+import Settings from './components/Settings'
 
 function App(props) {
 
@@ -74,31 +80,54 @@ function App(props) {
   return (
     <>
     <div className="page">
-      <Landing 
-      mini={minimize} 
-      handleMinimize={handleMinimize}
-      />
-
-      {/* <Route path="/movie/:id" render={(routeProps) => {
-        return <SingleMovie 
-          id={routeProps.match.params.id}
+      {/* <Landing 
+        mini={minimize} 
+        handleMinimize={handleMinimize}
+        /> */}
+      
+      <Route exact path="/" render={() => {
+        return  <Landing 
+        mini={minimize} 
+        handleMinimize={handleMinimize}
         />
+      }} />
+
+      <Route path="/movie/:id" render={(routeProps) => {
+        return (
+          <Landing 
+        mini={minimize} 
+        handleMinimize={handleMinimize}
+        user={loggedInUser} 
+        />
+
+        )
       }} />
 
       <Route path="/people/:id" render={(routeProps) => {
         return <Person 
           id={routeProps.match.params.id}
+          user={loggedInUser} 
         />
       }} />
 
       <Route path="/series/:id" render={(routeProps) => {
         return <SingleSeries 
+          user={loggedInUser} 
           id={routeProps.match.params.id}
+          
         />
-      }} /> */}
+      }} />
 
+      <Route path="/watchlist" render={() => {
+        return <Watchlist user={loggedInUser} />
+      }} />
+
+      <Route path="/settings" render={() => {
+        return <Settings user={loggedInUser} />
+      }} />
 
     </div>
+
     <Footer 
       onSignup={handleSignup}
       onLogin={handleLogin}

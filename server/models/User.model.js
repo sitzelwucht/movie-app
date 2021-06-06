@@ -10,7 +10,9 @@ let UserSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    watchlist: [{id: String, title: String}]
+      
 })
 
 let UserModel = model('user', UserSchema)
