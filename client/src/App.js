@@ -1,22 +1,25 @@
 import { useEffect, useState } from 'react'
-import { Route, withRouter } from 'react-router-dom'
+import { Route, withRouter, Switch } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
-import Landing from './components/Landing'
-import Footer from './components/Footer'
-// import SingleMovie from './components/SingleMovie'
-import SingleSeries from './components/SingleSeries'
-import Person from './components/Person'
 import axios from 'axios'
 import config from './config'
-// import SearchBar from './components/SearchBar';
+import Footer from './components/Footer'
+import IntroLogo from './components/IntroLogo'
+import Landing from './components/Landing'
+import SingleSeries from './components/SingleSeries'
+import Person from './components/Person'
+import SearchBar from './components/SearchBar';
 import Watchlist from './components/Watchlist';
 import Settings from './components/Settings'
+import SingleMovie from './components/SingleMovie';
+import NotFound from './components/NotFound'
+
 
 function App(props) {
 
-  const [minimize, setMinimize] = useState(false)
   const [loggedInUser, setLoggedInUser] = useState()
+  const [list, setList] = useState([])
   const [successAlert, setSuccessAlert] = useState(null)
   const [errorAlert, setErrorAlert] = useState(null)
 
@@ -56,10 +59,16 @@ function App(props) {
     .then(setLoggedInUser(null), () => props.history.push('/'))
   }
 
-  
-  const handleMinimize = () => {
-    setMinimize(true)
-  }
+
+  const getWatchlist = async () => {
+    const response = await axios.get(`${config.API_URL}/api/watchlist/${loggedInUser._id}`)
+    const data = await response.data.watchlist 
+    setList(data)
+ }
+
+  // const handleMinimize = () => {
+  //   setMinimize(true)
+  // }
 
 
   useEffect(() => {
@@ -69,38 +78,40 @@ function App(props) {
       .catch(err => console.log(err))
     }
 
-    document.addEventListener('keydown', setMinimize)
+    // document.addEventListener('keydown', setMinimize)
 
-    return () => {
-      document.removeEventListener('keydown', setMinimize)
-    }
-  })
+    // return () => {
+    //   document.removeEventListener('keydown', setMinimize)
+    // }
+  }, [])
+
+
+  useEffect(() => {
+    loggedInUser && getWatchlist()
+  }, [props])
 
 
   return (
     <>
     <div className="page">
-      {/* <Landing 
-        mini={minimize} 
-        handleMinimize={handleMinimize}
-        /> */}
-      
+
+      <div className="d-flex flex-column">
+        <IntroLogo mini={props.mini} />
+        <SearchBar />
+      </div>
+    
+    <Switch>
+
       <Route exact path="/" render={() => {
-        return  <Landing 
-        mini={minimize} 
-        handleMinimize={handleMinimize}
-        />
+        return <Landing />
       }} />
 
-      <Route path="/movie/:id" render={(routeProps) => {
-        return (
-          <Landing 
-        mini={minimize} 
-        handleMinimize={handleMinimize}
-        user={loggedInUser} 
+      <Route path="/movie/:id" render={(routeProps) => { 
+          return <SingleMovie 
+          user={loggedInUser} 
+          watchlist={list}
+          id={routeProps.match.params.id}
         />
-
-        )
       }} />
 
       <Route path="/people/:id" render={(routeProps) => {
@@ -113,18 +124,22 @@ function App(props) {
       <Route path="/series/:id" render={(routeProps) => {
         return <SingleSeries 
           user={loggedInUser} 
+          watchlist={list}
           id={routeProps.match.params.id}
-          
         />
       }} />
 
       <Route path="/watchlist" render={() => {
-        return <Watchlist user={loggedInUser} />
+        return <Watchlist user={loggedInUser} watchlist={list} />
       }} />
 
       <Route path="/settings" render={() => {
         return <Settings user={loggedInUser} />
       }} />
+
+      <Route component={NotFound} />
+
+    </Switch>
 
     </div>
 

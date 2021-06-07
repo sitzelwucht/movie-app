@@ -9,32 +9,46 @@ function SingleMovie(props) {
 
     const history = useHistory();
     const [movie, setMovie] = useState()
-
+    const [isOnList, setIsOnList] = useState(false)
     const [similar, setSimilar] = useState([])
 
-    const [hide, setHide] = useState(false)
+
+
+    const checkListStatus = (movieID) => {
+        for (let i = 0; i < props.watchlist.length; i++) {
+            if (props.watchlist[i].id == movieID) {
+                setIsOnList(true)
+                break
+            }
+            else {
+                setIsOnList(false)
+                break
+        }
+     }
+    }
 
     const getMovie = async () => {
         const response = await axios.get(`https://api.themoviedb.org/3/movie/${props.id}?api_key=${process.env.REACT_APP_API_KEY}`)
-        const movie = await response.data
-
+        const movieData = await response.data
+        checkListStatus(movieData.id)
         setMovie({
-        id: movie.id,
-        genres: movie.genres,
-        original_language: movie.original_language,
-        original_title: movie.original_title,
-        overview: movie.overview,
-        popularity: movie.popularity,
-        poster_path: movie.poster_path,
-        production_countries: movie.production_countries,
-        release_date: movie.release_date,
-        runtime: movie.runtime,
-        spoken_languages: movie.spoken_languages,
-        tagline: movie.tagline,
-        title: movie.title,
-        vote_average: movie.vote_average,
-        vote_count: movie.vote_count
+        id: movieData.id,
+        genres: movieData.genres,
+        original_language: movieData.original_language,
+        original_title: movieData.original_title,
+        overview: movieData.overview,
+        popularity: movieData.popularity,
+        poster_path: movieData.poster_path,
+        production_countries: movieData.production_countries,
+        release_date: movieData.release_date,
+        runtime: movieData.runtime,
+        spoken_languages: movieData.spoken_languages,
+        tagline: movieData.tagline,
+        title: movieData.title,
+        vote_average: movieData.vote_average,
+        vote_count: movieData.vote_count
         })
+        
     }
 
     const getSimilarMovies = async () => {
@@ -44,39 +58,53 @@ function SingleMovie(props) {
 
     }
 
-    const addToWatchlist = () => {
-        axios.patch(`${config.API_URL}/api/add`, {
-            movie: {id: movie.id, title: movie.title}, 
-            user: props.user.username})
-        .then(response => {
-            console.log(response)
-          })
-        .catch(err => console.log(err))
-    }
 
+    const editWatchlist = (bool) => {
+        if(bool) {
+            axios.patch(`${config.API_URL}/api/add`, {
+                movie: {id: movie.id, title: movie.title}, 
+                user: props.user.username})
+            .then(() => {
+               setIsOnList(true)
+              })
+            .catch(err => console.log(err))
+        }
+        else {
+            axios.patch(`${config.API_URL}/api/remove`, {
+                movie: {id: movie.id, title: movie.title}, 
+                user: props.user.username})
+            .then(() => {
+               setIsOnList(false)
+              })
+            .catch(err => console.log(err))
+        }
+    }
 
 
     useEffect(() => {
         getMovie()
         getSimilarMovies()
-
+        movie && props.watchlist && checkListStatus()
     }, [props])
 
 
-
-    
     return (
         <>
-
         {
-           !hide && <div className="movie-box">
+        <div className="movie-box">
 
             { movie && <>
+ 
                 <div id="buttons">
 
                     <div className="d-flex justify-content-between">
                         <h2>{movie.title} ({movie.release_date.substr(0,4)})</h2>
-                        <Button variant="outline-dark" onClick={addToWatchlist}>+ add to watchlist</Button>
+                        
+                        {
+                         !isOnList ? 
+                         <Button variant="outline-dark" onClick={() => editWatchlist(true)}>✚ add to watchlist</Button> :
+                        <Button variant="outline-danger" onClick={() => editWatchlist(false)}>✖ remove from watchlist</Button>
+                        }
                     </div>
 
                     { movie.title !== movie.original_title && <h4>{movie.original_title} </h4>}
@@ -103,7 +131,7 @@ function SingleMovie(props) {
                                         <ul>
                                     {
                                     movie.genres.length ? movie.genres.map((item, i) => {
-                                            return <li>{item.name}</li>
+                                            return <li key={i}>{item.name}</li>
                                         }) : <li>N/A</li>
                                     }
                                     </ul>
@@ -114,18 +142,22 @@ function SingleMovie(props) {
                                     <td className="indent">{new Date(movie.release_date).toDateString()}</td>
                                 </tr>
                                 <tr>
+                                    <td className="bold">Languages:</td>
+                                    <td className="indent">{
+                                        <ul>
+                                            {movie.spoken_languages.length ? movie.spoken_languages.map((item, i) => {
+                                                return <li key={i}>{item.english_name}</li>
+                                            }) : 'N/A'
+                                            }
+                                        </ul>
+                                    }</td>
+                                </tr>
+                                <tr>
                                     <td className="bold">Runtime:</td>
                                     <td className="indent">{movie.runtime} mins</td>
                                 </tr>
                                 <tr>
                                     <td className="bold">Rating:</td>
-                                    {/* <td className="indent">
-                                    {   avgRating ? <>
-                                        <span className={color}>{avgRating} </span>
-                                        /10 <span>({movie.vote_count} votes</span>)</> : 'N/A'
-                                    }
-                                    </td> */}
-
                                     {
                                         !movie.vote_average ? <td className="indent">N/A</td> :
                                         <td className="indent">

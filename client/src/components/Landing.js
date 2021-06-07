@@ -12,35 +12,8 @@ export default function Landing(props) {
     return (
         <div className={props.mini ? "mini" : "main-container"}>
     
-                <SearchBar handleMinimize={props.handleMinimize} mini={props.mini}/>
+                <h1 className="m-5">Welcome</h1>
                 
-                <div className="d-flex flex-column">
-        
-                <IntroLogo mini={props.mini} />
-       
-                <Route path="/movie/:id" render={(routeProps) => {
-                    return <SingleMovie 
-                    id={routeProps.match.params.id}
-                    user={props.user} 
-                    />
-                }} />
-
-                <Route path="/people/:id" render={(routeProps) => {
-                        return <Person 
-                        id={routeProps.match.params.id}
-                        user={props.user} 
-                        />
-                    }} />
-
-                <Route path="/series/:id" render={(routeProps) => {
-                    return <SingleSeries 
-                    id={routeProps.match.params.id}
-                    user={props.user} 
-                    />
-                }} /> 
-
-
-            </div>
         </div>
 
     )

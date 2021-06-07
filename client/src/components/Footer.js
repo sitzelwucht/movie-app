@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Modal } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import Signup from './Signup'
 import Login from './Login'
-import StatusAlert from './StatusAlert'
+
 
 
 export default function Footer(props) {

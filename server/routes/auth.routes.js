@@ -3,6 +3,7 @@ const router = express.Router()
 const bcrypt = require('bcryptjs')
 const UserModel = require('../models/User.model')
 
+
 const isLoggedIn = (req, res, next) => {
     if (req.session.isLoggedInUser) {
         next()
@@ -14,7 +15,6 @@ const isLoggedIn = (req, res, next) => {
         })
     }
 }
-
 
 
 router.get('/user', isLoggedIn, (req, res, next) => {
@@ -85,7 +85,8 @@ router.get('/watchlist/:user', (req, res) => {
 })
 
 
-router.patch('/add/', (req, res) => {
+
+router.patch('/add', (req, res) => {
 
     const { movie, user } = req.body
 
@@ -99,9 +100,23 @@ router.patch('/add/', (req, res) => {
             message: err
         })
     })
+})
 
 
+router.patch('/remove', (req, res) => {
 
+    const { movie, user } = req.body
+
+    UserModel.updateOne({ username: user }, {$pop: { watchlist: movie }})
+    .then(response => {
+        res.status(200).json(response)
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: 'Problem occurred',
+            message: err
+        })
+    })
 })
 
 

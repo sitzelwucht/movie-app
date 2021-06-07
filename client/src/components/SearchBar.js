@@ -118,44 +118,46 @@ export default function SearchBar(props) {
 
 
     return (
-        <div class="search">
+        <div className={props.mini ? "mini" : "main-container"}>
+            <div class="search">
 
-            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-                <Tab eventKey="profile" title="Movies">
-                    <input type="text" placeholder="search movies..." 
-                    onChange={handleMovieSearch} ref={searchRef}
-                    />   
-                </Tab>
-                <Tab eventKey="home" title="People">
-                    <input type="text" placeholder="search people..." 
-                    onChange={handlePeopleSearch} ref={searchRef}
-                    />
-                </Tab>
-                <Tab eventKey="contact" title="TV" >
-                <input type="text" placeholder="search series..." 
-                    onChange={handleTVSearch} ref={searchRef}
-                    />
-                </Tab>
-            </Tabs>
+                <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+                    <Tab eventKey="profile" title="Movies">
+                        <input type="text" placeholder="search movies..." 
+                        onChange={handleMovieSearch} ref={searchRef}
+                        />   
+                    </Tab>
+                    <Tab eventKey="home" title="People">
+                        <input type="text" placeholder="search people..." 
+                        onChange={handlePeopleSearch} ref={searchRef}
+                        />
+                    </Tab>
+                    <Tab eventKey="contact" title="TV" >
+                    <input type="text" placeholder="search series..." 
+                        onChange={handleTVSearch} ref={searchRef}
+                        />
+                    </Tab>
+                </Tabs>
 
-                <div className={props.mini ? "search-results" : "hidden"}>
-                    {
-                        noInput ? null : (!searchResults.length ? <div className="no-results">No results</div> : searchResults.map((item, i) => {
-                            return <ListItem key={i}
-                                movie={item.movie}
-                                series={item.series} 
-                                id={item.id}
-                                title={item.title}
-                                name={item.name}
-                                release={item.release}
-                                overview={item.overview}
-                                knownFor={item.known_for}
-                                knownForDept={item.known_for_department}
-                            />
-                        }))
-                    }
+                    <div className="search-results">
+                        {
+                            noInput ? null : (!searchResults.length ? <div className="no-results">No results</div> : searchResults.map((item, i) => {
+                                return <ListItem key={i}
+                                    movie={item.movie}
+                                    series={item.series} 
+                                    id={item.id}
+                                    title={item.title}
+                                    name={item.name}
+                                    release={item.release}
+                                    overview={item.overview}
+                                    knownFor={item.known_for}
+                                    knownForDept={item.known_for_department}
+                                />
+                            }))
+                        }
 
-                </div>
+                    </div>
+            </div>
         </div>
     )
 }
