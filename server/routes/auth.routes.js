@@ -107,7 +107,7 @@ router.patch('/remove', (req, res) => {
 
     const { movie, user } = req.body
 
-    UserModel.updateOne({ username: user }, {$pop: { watchlist: movie }})
+    UserModel.updateOne({ username: user }, {$pull: { watchlist: movie }})
     .then(response => {
         res.status(200).json(response)
     })

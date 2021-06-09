@@ -87,24 +87,26 @@ function SingleMovie(props) {
         movie && props.watchlist && checkListStatus()
     }, [props])
 
-
+ 
     return (
         <>
         {
         <div className="movie-box">
 
             { movie && <>
- 
-                <div id="buttons">
 
+                <div id="buttons">
                     <div className="d-flex justify-content-between">
                         <h2>{movie.title} ({movie.release_date.substr(0,4)})</h2>
-                        
                         {
-                         !isOnList ? 
+                            props.user && <> 
+                         { !isOnList ? 
                          <Button variant="outline-dark" onClick={() => editWatchlist(true)}>✚ add to watchlist</Button> :
                         <Button variant="outline-danger" onClick={() => editWatchlist(false)}>✖ remove from watchlist</Button>
+}  
+                        </>
                         }
+
                     </div>
 
                     { movie.title !== movie.original_title && <h4>{movie.original_title} </h4>}
@@ -177,7 +179,7 @@ function SingleMovie(props) {
                         </table>
                     </div>
                 </div>
-                    <div><img src={`http://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt="poster" /></div>
+                    <div>{movie.poster_path && <img src={`http://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt="poster" />}</div>
                     
                 </div>
                
