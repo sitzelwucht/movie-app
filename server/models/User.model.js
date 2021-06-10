@@ -11,7 +11,8 @@ let UserSchema = new Schema({
         type: String,
         required: true
     },
-    watchlist: [{id: String, title: String}]
+    movieList: [{id: String, title: String}],
+    seriesList: [{id: String, title: String}],
       
 })
 

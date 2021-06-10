@@ -86,11 +86,10 @@ router.get('/watchlist/:user', (req, res) => {
 
 
 
-router.patch('/add', (req, res) => {
+router.patch('/addmovie', (req, res) => {
 
     const { movie, user } = req.body
-
-    UserModel.updateOne({ username: user }, {$push: { watchlist: movie }})
+    UserModel.updateOne({ username: user }, {$push: { movieList: movie }})
     .then(response => {
         res.status(200).json(response)
     })
@@ -103,11 +102,10 @@ router.patch('/add', (req, res) => {
 })
 
 
-router.patch('/remove', (req, res) => {
+router.patch('/removemovie', (req, res) => {
 
     const { movie, user } = req.body
-
-    UserModel.updateOne({ username: user }, {$pull: { watchlist: movie }})
+    UserModel.updateOne({ username: user }, {$pull: { movieList: movie }})
     .then(response => {
         res.status(200).json(response)
     })
@@ -119,6 +117,37 @@ router.patch('/remove', (req, res) => {
     })
 })
 
+
+router.patch('/addseries', (req, res) => {
+
+    const { series, user } = req.body
+    UserModel.updateOne({ username: user }, {$push: { seriesList: series }})
+    .then(response => {
+        res.status(200).json(response)
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: 'Problem occurred',
+            message: err
+        })
+    })
+})
+
+
+router.patch('/removeseries', (req, res) => {
+
+    const { series, user } = req.body
+    UserModel.updateOne({ username: user }, {$pull: { seriesList: series }})
+    .then(response => {
+        res.status(200).json(response)
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: 'Problem occurred',
+            message: err
+        })
+    })
+})
 
 
 router.post('/logout', (req, res) => {

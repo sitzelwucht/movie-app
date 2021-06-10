@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { Link, withRouter, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+import config from '../config'
 import axios from 'axios'
-import SearchBar from './SearchBar'
 
 export default function SingleSeries(props) {
 
     const history = useHistory();
     const [series, setSeries] = useState()
+    const [isOnList, setIsOnList] = useState(() => {
+        for (let i = 0; i < props.seriesList.length; i++) {
+            if (props.seriesList[i].id == props.id) {
+                return true
+            }
+        }
+        return false
+    })
 
-
-    const [hide, setHide] = useState(false)
 
     const getSeries = async () => {
         const response = await axios.get(`https://api.themoviedb.org/3/tv/${props.id}?api_key=${process.env.REACT_APP_API_KEY}`)
@@ -32,25 +38,64 @@ export default function SingleSeries(props) {
         })
     }
 
+    const editWatchlist = (bool) => {
+        if(bool) {
+            axios.patch(`${config.API_URL}/api/addseries`, {
+                series: {id: series.id, title: series.title}, 
+                user: props.user.username})
+            .then(() => {
+               setIsOnList(true)
+              })
+            .catch(err => console.log(err))
+        }
+        else {
+            axios.patch(`${config.API_URL}/api/removeseries`, {
+                series: {id: series.id, title: series.title}, 
+                user: props.user.username})
+            .then(() => {
+               setIsOnList(false)
+              })
+            .catch(err => console.log(err))
+        }
+    }
 
     useEffect(() => {
         getSeries()
-        setHide(false)
     }, [props])
+
+
+
+    useEffect(() => {
+        if (props.seriesList) {
+            setIsOnList(() => {
+                for (let i = 0; i < props.seriesList.length; i++) {
+                    if (props.seriesList[i].id == props.id) {
+                        return true
+                    }
+                }
+                return false
+            })
+        }
+    }, [series])
+
 
 
     return (
         <>
-        
-        { !hide && 
-        
             <div className="movie-box">
         { series && <>
                 <div id="buttons">
-                    <div className="d-flex justify-content-between">
-                        <Button variant="outline-light" onClick={() => history.goBack()}>˂</Button>
-                        <Button variant="dark" onClick={() => setHide(true)}>X</Button>
-                    </div>
+                {
+                            props.user && props.seriesList && <> 
+                         { !isOnList ? 
+                         <Button variant="outline-dark" onClick={() => editWatchlist(true)}>✚ add to watchlist</Button> :
+                        <Button variant="outline-danger" onClick={() => editWatchlist(false)}>✖ remove from watchlist</Button>
+                       
+                        }  
+
+                        </>
+                        }
+
                 </div>
 
                 <div className="reversed d-flex justify-content-between align-items-center">
@@ -100,8 +145,6 @@ export default function SingleSeries(props) {
             </>}
 
         </div>
-        
-        }
         </>
     )
 }

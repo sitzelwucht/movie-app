@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Route, withRouter, Switch } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
@@ -19,7 +19,8 @@ import NotFound from './components/NotFound'
 function App(props) {
 
   const [loggedInUser, setLoggedInUser] = useState()
-  const [list, setList] = useState([])
+  const [movieList, setMovieList] = useState([])
+  const [seriesList, setSeriesList] = useState([])
   const [successAlert, setSuccessAlert] = useState(null)
   const [errorAlert, setErrorAlert] = useState(null)
 
@@ -62,9 +63,14 @@ function App(props) {
 
   const getWatchlist = async () => {
     const response = await axios.get(`${config.API_URL}/api/watchlist/${loggedInUser._id}`)
-    const data = await response.data.watchlist 
-    setList(data)
+    const movieData = await response.data.movieList 
+    const seriesData = await response.data.seriesList 
+    setMovieList(movieData)
+    setSeriesList(seriesData)
  }
+
+
+
 
   // const handleMinimize = () => {
   //   setMinimize(true)
@@ -109,7 +115,7 @@ function App(props) {
       <Route path="/movie/:id" render={(routeProps) => { 
           return <SingleMovie 
           user={loggedInUser} 
-          watchlist={list}
+          movieList={movieList}
           id={routeProps.match.params.id}
         />
       }} />
@@ -124,13 +130,17 @@ function App(props) {
       <Route path="/series/:id" render={(routeProps) => {
         return <SingleSeries 
           user={loggedInUser} 
-          watchlist={list}
+          seriesList={seriesList}
           id={routeProps.match.params.id}
         />
       }} />
 
       <Route path="/watchlist" render={() => {
-        return <Watchlist user={loggedInUser} watchlist={list} />
+        return <Watchlist 
+        user={loggedInUser} 
+        seriesList={seriesList}
+        movieList={movieList}
+         />
       }} />
 
       <Route path="/settings" render={() => {

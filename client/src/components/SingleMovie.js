@@ -3,34 +3,28 @@ import { Link, withRouter, useHistory } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import config from '../config'
 import axios from 'axios'
-import SearchBar from './SearchBar'
+
 
 function SingleMovie(props) {
 
     const history = useHistory();
     const [movie, setMovie] = useState()
-    const [isOnList, setIsOnList] = useState(false)
+    const [isOnList, setIsOnList] = useState(() => {
+        for (let i = 0; i < props.movieList.length; i++) {
+            if (props.movieList[i].id == props.id) {
+                return true
+            }
+        }
+        return false
+    })
+
     const [similar, setSimilar] = useState([])
 
-
-
-    const checkListStatus = (movieID) => {
-        for (let i = 0; i < props.watchlist.length; i++) {
-            if (props.watchlist[i].id == movieID) {
-                setIsOnList(true)
-                break
-            }
-            else {
-                setIsOnList(false)
-                break
-        }
-     }
-    }
 
     const getMovie = async () => {
         const response = await axios.get(`https://api.themoviedb.org/3/movie/${props.id}?api_key=${process.env.REACT_APP_API_KEY}`)
         const movieData = await response.data
-        checkListStatus(movieData.id)
+
         setMovie({
         id: movieData.id,
         genres: movieData.genres,
@@ -51,6 +45,7 @@ function SingleMovie(props) {
         
     }
 
+
     const getSimilarMovies = async () => {
         const response = await axios.get(`https://api.themoviedb.org/3/movie/${props.id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`)
         const similarMovies = await response.data
@@ -61,7 +56,7 @@ function SingleMovie(props) {
 
     const editWatchlist = (bool) => {
         if(bool) {
-            axios.patch(`${config.API_URL}/api/add`, {
+            axios.patch(`${config.API_URL}/api/addmovie`, {
                 movie: {id: movie.id, title: movie.title}, 
                 user: props.user.username})
             .then(() => {
@@ -70,7 +65,7 @@ function SingleMovie(props) {
             .catch(err => console.log(err))
         }
         else {
-            axios.patch(`${config.API_URL}/api/remove`, {
+            axios.patch(`${config.API_URL}/api/removemovie`, {
                 movie: {id: movie.id, title: movie.title}, 
                 user: props.user.username})
             .then(() => {
@@ -81,13 +76,27 @@ function SingleMovie(props) {
     }
 
 
-    useEffect(() => {
+    useEffect(() => {        
         getMovie()
         getSimilarMovies()
-        movie && props.watchlist && checkListStatus()
     }, [props])
 
- 
+
+
+    useEffect(() => {
+        if (props.movieList) {
+            setIsOnList(() => {
+                for (let i = 0; i < props.movieList.length; i++) {
+                    if (props.movieList[i].id == props.id) {
+                        return true
+                    }
+                }
+                return false
+            })
+        }
+    }, [movie])
+
+
     return (
         <>
         {
@@ -97,13 +106,16 @@ function SingleMovie(props) {
 
                 <div id="buttons">
                     <div className="d-flex justify-content-between">
+
                         <h2>{movie.title} ({movie.release_date.substr(0,4)})</h2>
                         {
-                            props.user && <> 
-                         { !isOnList ? 
-                         <Button variant="outline-dark" onClick={() => editWatchlist(true)}>✚ add to watchlist</Button> :
-                        <Button variant="outline-danger" onClick={() => editWatchlist(false)}>✖ remove from watchlist</Button>
-}  
+                            props.user && props.movieList && <> 
+                         { isOnList ? 
+                         <Button variant="outline-danger" onClick={() => editWatchlist(false)}>✖ remove from watchlist </Button> :
+                        <Button variant="outline-dark" onClick={() => editWatchlist(true)}>✚ add to watchlist</Button>
+                       
+                        }  
+
                         </>
                         }
 
