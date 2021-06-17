@@ -25,6 +25,9 @@ function SingleMovie(props) {
         const response = await axios.get(`https://api.themoviedb.org/3/movie/${props.id}?api_key=${process.env.REACT_APP_API_KEY}`)
         const movieData = await response.data
 
+        const cast = await axios(`https://api.themoviedb.org/3/movie/${props.id}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
+        const castData = await cast.data
+
         setMovie({
         id: movieData.id,
         genres: movieData.genres,
@@ -40,7 +43,9 @@ function SingleMovie(props) {
         tagline: movieData.tagline,
         title: movieData.title,
         vote_average: movieData.vote_average,
-        vote_count: movieData.vote_count
+        vote_count: movieData.vote_count,
+        cast: castData.cast,
+        crew: castData.crew
         })
         
     }
@@ -101,9 +106,9 @@ function SingleMovie(props) {
         <>
         {
         <div className="movie-box">
-
+          
             { movie && <>
-
+                {console.log(movie.crew)}
                 <div id="buttons">
                     <div className="d-flex justify-content-between">
 
@@ -168,7 +173,7 @@ function SingleMovie(props) {
                                 </tr>
                                 <tr>
                                     <td className="bold">Runtime:</td>
-                                    <td className="indent">{movie.runtime} mins</td>
+                                    <td className="indent">{movie.runtime > 0 ? `${movie.runtime} mins`: 'N/A'}</td>
                                 </tr>
                                 <tr>
                                     <td className="bold">Rating:</td>
@@ -199,17 +204,51 @@ function SingleMovie(props) {
 
                 <div>{movie.overview}</div>
                 
-                   
+
                 </div>
                 
-
                 <div className="reversed">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td className="bold">Director</td>
+                            <td className="indent">
+                            {/* movie.crew.filter(item => item.known_for_department === 'Directing').join(',') */}
+                                    {console.log(movie.crew)}
+                            {
+                                movie.crew.map((item, i) => {
+                                    if(item.known_for_department === 'Directing' && i === 0) {
+                                        return <li key={i}><Link to={`/people/${item.id}`}>{item.name}</Link></li>
+                                    }
+                                })
+                            }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className="bold">Cast:</td>
+                            <td className="indent">
+                            {
+                                <ul>{
+                                    movie.cast.map((item, i) => {
+                                        return <li key={i}><Link to={`/people/${item.id}`}>{item.name}</Link></li>
+                                    })
+                                }
+                                </ul>  
+
+                            }</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                </div>  
+                       
+                <div>
                     { similar.length > 0 && <h5>Similar movies: </h5> }
                     <ul>
                     {
                         similar.map((item, i) => {
                             return <>
-                            <li><Link to={`/movie/${item.id}`}>{item.title}</Link></li>
+                            <li key={i}><Link to={`/movie/${item.id}`}>{item.title}</Link></li>
                             </>
                         })
                     }

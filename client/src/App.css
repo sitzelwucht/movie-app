@@ -76,6 +76,8 @@ li {
 ul a {
   color: rgb(184, 184, 184);
   text-decoration: none;
+  transition: all .3s ease-in!important;
+  
 }
 ul a:hover {
   color: rgb(255, 255, 255);
@@ -93,9 +95,9 @@ td {
 .bold {
   font-weight: bold;
 }
-/* .hidden {
+.hidden {
   display: none;
-} */
+}
 .form-control {
   font-family: 'Inconsolata';
   font-size: 1.2em;
@@ -355,7 +357,11 @@ input::placeholder {
 }
 .watchlist li {
   display: block;
+  font-size: 1.1em;
+  padding: 5px;
 }
+
+
 
 #credits li {
   display: block;
