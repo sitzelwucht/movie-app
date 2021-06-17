@@ -9,6 +9,7 @@ function SingleMovie(props) {
 
     const history = useHistory();
     const [movie, setMovie] = useState()
+    const [crew, setCrew] = useState()
     const [isOnList, setIsOnList] = useState(() => {
         for (let i = 0; i < props.movieList.length; i++) {
             if (props.movieList[i].id == props.id) {
@@ -46,6 +47,12 @@ function SingleMovie(props) {
         vote_count: movieData.vote_count,
         cast: castData.cast,
         crew: castData.crew
+        })
+
+
+        setCrew({
+            directors: castData.crew.filter(item => item.known_for_department === 'Directing').slice(0, 1),
+            writers: castData.crew.filter(item => item.known_for_department === 'Writing').slice(0, 1)
         })
         
     }
@@ -108,7 +115,7 @@ function SingleMovie(props) {
         <div className="movie-box">
           
             { movie && <>
-                {console.log(movie.crew)}
+ 
                 <div id="buttons">
                     <div className="d-flex justify-content-between">
 
@@ -208,18 +215,29 @@ function SingleMovie(props) {
                 </div>
                 
                 <div className="reversed">
+
                 <table>
                     <tbody>
                         <tr>
-                            <td className="bold">Director</td>
+                            <td className="bold">Director:</td>
                             <td className="indent">
-                            {/* movie.crew.filter(item => item.known_for_department === 'Directing').join(',') */}
-                                    {console.log(movie.crew)}
                             {
-                                movie.crew.map((item, i) => {
-                                    if(item.known_for_department === 'Directing' && i === 0) {
+                                crew && crew.directors.map((item, i) => {
+
                                         return <li key={i}><Link to={`/people/${item.id}`}>{item.name}</Link></li>
-                                    }
+                                    
+                                })
+                            }
+                            </td>
+                        </tr>
+                        <tr>
+                        <td className="bold">Writer:</td>
+
+                            <td className="indent">
+                            {
+                                crew && crew.writers.map((item, i) => {
+                                        return <li key={i}><Link to={`/people/${item.id}`}>{item.name}</Link></li>
+                                    
                                 })
                             }
                             </td>

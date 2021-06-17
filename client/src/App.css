@@ -85,6 +85,7 @@ ul a:hover {
 }
 td {
   padding: 7px;
+  vertical-align: top;
 }
 .btn-danger {
   background: rgba(167, 0, 0, 0.4);
