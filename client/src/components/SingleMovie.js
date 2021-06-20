@@ -46,7 +46,6 @@ function SingleMovie(props) {
         vote_average: movieData.vote_average,
         vote_count: movieData.vote_count,
         cast: castData.cast,
-        crew: castData.crew
         })
 
 
@@ -115,7 +114,7 @@ function SingleMovie(props) {
         <div className="movie-box">
           
             { movie && <>
- 
+                {console.log(crew)}
                 <div id="buttons">
                     <div className="d-flex justify-content-between">
 
@@ -135,7 +134,7 @@ function SingleMovie(props) {
 
                     { movie.title !== movie.original_title && <h4>{movie.original_title} </h4>}
                     <div className="uppercase">{movie.production_countries.map((item, i) => {
-                                            return <li>{item.name}</li>
+                                            return <li key={i}>{item.name}</li>
                                             })}</div>
                 </div>
 

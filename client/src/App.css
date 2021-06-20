@@ -61,6 +61,10 @@ h4{
 a {
   color: rgb(247, 189, 83);
   text-decoration: none;
+  transition: all .3s ease-in;
+}
+a:hover {
+  color: rgb(148, 112, 46);
 }
 ul {
   padding-left: 0!important;
@@ -360,6 +364,35 @@ input::placeholder {
   display: block;
   font-size: 1.1em;
   padding: 5px;
+}
+
+.popular-title {
+  color: orange;
+  padding: 1.2em;
+  background: rgba(30, 30, 30, 0.301)
+}
+
+.popular-title span {
+  font-size: .6em;
+}
+
+.popular-title div {
+  font-size: .5em;
+  padding: .8em 0;
+  color: white;
+}
+.popular-list {
+  font-size: 1.1em;
+}
+.popular-list ul {
+  list-style:square!important;
+  display: inline-block;
+  line-height: 2.5em;
+}
+.popular-list li {
+  padding: 15px;
+  list-style:square!important;
+  margin-bottom: 40px!important;
 }
 
 

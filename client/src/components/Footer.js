@@ -38,6 +38,11 @@ export default function Footer(props) {
                 </a>
             </div>
 
+            <div>
+                <Link to={'/popular'}><Button variant="link">popular</Button></Link>
+                <Link to={'/top'}><Button variant="link">top rated</Button></Link>
+            </div>
+
 
         {
             props.user ? <div className="user-box">

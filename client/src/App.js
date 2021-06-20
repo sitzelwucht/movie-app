@@ -14,6 +14,7 @@ import Watchlist from './components/Watchlist';
 import Settings from './components/Settings'
 import SingleMovie from './components/SingleMovie';
 import NotFound from './components/NotFound'
+import Popular from './components/Popular';
 
 
 function App(props) {
@@ -21,6 +22,7 @@ function App(props) {
   const [loggedInUser, setLoggedInUser] = useState()
   const [movieList, setMovieList] = useState([])
   const [seriesList, setSeriesList] = useState([])
+
   const [successAlert, setSuccessAlert] = useState(null)
   const [errorAlert, setErrorAlert] = useState(null)
 
@@ -69,7 +71,11 @@ function App(props) {
     setSeriesList(seriesData)
  }
 
-
+  // const getPopular = async () => {
+  //   const response = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`)
+  //   const popularList = await response.data
+  //   setPopular(popularList)
+  // }
 
 
   // const handleMinimize = () => {
@@ -145,6 +151,10 @@ function App(props) {
 
       <Route path="/settings" render={() => {
         return <Settings user={loggedInUser} />
+      }} />
+
+      <Route path="/popular" render={() => {
+          return <Popular/>
       }} />
 
       <Route component={NotFound} />
