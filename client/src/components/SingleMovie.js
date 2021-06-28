@@ -114,7 +114,7 @@ function SingleMovie(props) {
         <div className="movie-box">
           
             { movie && <>
-                {console.log(crew)}
+
                 <div id="buttons">
                     <div className="d-flex justify-content-between">
 
@@ -229,6 +229,7 @@ function SingleMovie(props) {
                             }
                             </td>
                         </tr>
+                        
                         <tr>
                         <td className="bold">Writer:</td>
 

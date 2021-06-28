@@ -25,12 +25,12 @@ export default function Login(props) {
                     <Form onSubmit={props.onLogin}>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>username</Form.Label>
-                            <Form.Control type="text" name="username" placeholder="Enter email" />
+                            <Form.Control type="text" name="username" placeholder="Enter username" />
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" name="password" placeholder="Password" />
+                            <Form.Control type="password" name="password" placeholder="Enter password" />
                         </Form.Group>
 
                         <Button variant="warning" type="submit" className="mt-3">

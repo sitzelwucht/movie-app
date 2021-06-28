@@ -26,7 +26,6 @@ export default function Popular(props) {
             <h3 className="popular-title">Popular <span>({new Date().toLocaleDateString()})</span>
             <div>Movies with the most activity in terms of views and ratings</div></h3>
             
-
             <div className="m-5 popular-list">
             <ul>
             { !popular.results ? <div>loading...</div> : popular.results.map((item, i) => {

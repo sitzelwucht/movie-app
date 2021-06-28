@@ -15,7 +15,7 @@ import Settings from './components/Settings'
 import SingleMovie from './components/SingleMovie';
 import NotFound from './components/NotFound'
 import Popular from './components/Popular';
-
+import TopRated from './components/TopRated'
 
 function App(props) {
 
@@ -70,17 +70,6 @@ function App(props) {
     setMovieList(movieData)
     setSeriesList(seriesData)
  }
-
-  // const getPopular = async () => {
-  //   const response = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`)
-  //   const popularList = await response.data
-  //   setPopular(popularList)
-  // }
-
-
-  // const handleMinimize = () => {
-  //   setMinimize(true)
-  // }
 
 
   useEffect(() => {
@@ -157,6 +146,9 @@ function App(props) {
           return <Popular/>
       }} />
 
+      <Route path="/top" render={() => {
+          return <TopRated />
+      }} />
       <Route component={NotFound} />
 
     </Switch>
