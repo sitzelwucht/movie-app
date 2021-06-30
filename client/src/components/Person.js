@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Link, withRouter, useHistory } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
-import SearchBar from './SearchBar'
 
 function Person(props) {
 
@@ -10,7 +9,7 @@ function Person(props) {
     const [person, setPerson] = useState()
     const [credits, setCredits] = useState()
 
-    const [hide, setHide] = useState(false)
+
     const [showFull, setShowFull] = useState(false)
 
 
@@ -59,6 +58,7 @@ function Person(props) {
             <div className="d-flex justify-content-between align-items-center">
             
                 <div >
+                <Button variant="dark" onClick={history.goBack}>‹‹</Button>
                     <h2>{person.name}</h2>
                     <table className="mt-5">
                         <tbody>
