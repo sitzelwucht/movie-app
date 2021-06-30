@@ -9,7 +9,7 @@ export default function Watchlist(props) {
         <div className="watchlist">
          {
        
-           props.user && <>
+           props.user && <React.Fragment>
            <div><h3>Watchlist</h3></div>
            <div className="d-flex">
            
@@ -32,7 +32,7 @@ export default function Watchlist(props) {
             }</ul>
 
             </div>
-            </>
+            </React.Fragment>
 
          }
         

@@ -81,19 +81,19 @@ export default function SingleSeries(props) {
 
 
     return (
-        <>
+        <React.Fragment>
             <div className="movie-box">
-        { series && <>
+        { series && <React.Fragment>
                 <div id="buttons">
                 {
-                            props.user && props.seriesList && <> 
+                            props.user && props.seriesList && <React.Fragment>
                          { !isOnList ? 
                          <Button variant="outline-dark" onClick={() => editWatchlist(true)}>✚ add to watchlist</Button> :
                         <Button variant="outline-danger" onClick={() => editWatchlist(false)}>✖ remove from watchlist</Button>
                        
                         }  
 
-                        </>
+                        </React.Fragment>
                         }
 
                 </div>
@@ -142,9 +142,9 @@ export default function SingleSeries(props) {
         
                     <div>{series.overview}</div>
                 </div>
-            </>}
+            </React.Fragment>}
 
         </div>
-        </>
+        </React.Fragment>
     )
 }

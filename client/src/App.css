@@ -395,7 +395,38 @@ input::placeholder {
   margin-bottom: 40px!important;
 }
 
+.upcoming {
+  font-size: 2em;
+  color: orange;
+  font-family: 'Fredoka One';
+}
+.carousel {
+  min-width: 850px;
+  max-width: 850px;
+}
+.slider-item {
+  padding: 30px;
+  background-color: rgba(78, 78, 78, 0.226);
+  color: white;
+  min-width: 475px;
+  max-width: 475px;
+  margin: 0 180px;
+  display: flex;
+  flex-direction: column;
+}
 
+.slider-title {
+  text-align: center;
+  padding: 15px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+.slider-date {
+  text-align: center;
+  padding: 8px;
+  color: rgba(211, 211, 211, 0.596);
+  font-size: .9em;
+}
 
 #credits li {
   display: block;

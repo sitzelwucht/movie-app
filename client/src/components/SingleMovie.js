@@ -109,25 +109,25 @@ function SingleMovie(props) {
 
 
     return (
-        <>
+        <React.Fragment>
         {
         <div className="movie-box">
           
-            { movie && <>
+            { movie && <React.Fragment>
 
                 <div id="buttons">
                     <div className="d-flex justify-content-between">
 
                         <h2>{movie.title} ({movie.release_date.substr(0,4)})</h2>
                         {
-                            props.user && props.movieList && <> 
+                            props.user && props.movieList && <React.Fragment>
                          { isOnList ? 
                          <Button variant="outline-danger" onClick={() => editWatchlist(false)}>✖ remove from watchlist </Button> :
                         <Button variant="outline-dark" onClick={() => editWatchlist(true)}>✚ add to watchlist</Button>
                        
                         }  
 
-                        </>
+                        </React.Fragment>
                         }
 
                     </div>
@@ -265,19 +265,19 @@ function SingleMovie(props) {
                     <ul>
                     {
                         similar.map((item, i) => {
-                            return <>
+                            return <React.Fragment>
                             <li key={i}><Link to={`/movie/${item.id}`}>{item.title}</Link></li>
-                            </>
+                            </React.Fragment>
                         })
                     }
                     </ul>
                     </div>
-            </>}
+            </React.Fragment>}
 
         </div>
         }
         
-        </>
+        </React.Fragment>
     )
 }
 

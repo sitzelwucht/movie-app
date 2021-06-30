@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Route, withRouter, Switch } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
@@ -93,7 +93,7 @@ function App(props) {
 
 
   return (
-    <>
+    <React.Fragment>
     <div className="page">
 
       <div className="d-flex flex-column">
@@ -163,7 +163,7 @@ function App(props) {
       successMsg={successAlert}
       user={loggedInUser}
     />
-    </>
+      </React.Fragment>
   );
 }
 

@@ -51,10 +51,10 @@ function Person(props) {
 
 
     return (
-        <>
+        <React.Fragment>
         <div className="movie-box">
 
-        { person && <>
+        { person && <React.Fragment>
         
             <div className="d-flex justify-content-between align-items-center">
             
@@ -87,12 +87,12 @@ function Person(props) {
             </div>
 
             <div className="reversed">
-            { person.bio && <>
+            { person.bio && <React.Fragment>
                 <div id={!showFull && "bio"}>
                 {
                     showFull ? 
-                    <> {person.bio} </> : 
-                    <> {person.bio.substr(0, 400)} </>
+                    <React.Fragment> {person.bio} </React.Fragment> : 
+                    <React.Fragment> {person.bio.substr(0, 400)} </React.Fragment>
                 }
             </div>
             {
@@ -100,7 +100,7 @@ function Person(props) {
                <Button variant="dark" className="border mx-5 mt-1" onClick={() => setShowFull(true)}>show more</Button>
             
             }   
-            </>
+            </React.Fragment>
             }
             </div>
 
@@ -117,10 +117,10 @@ function Person(props) {
 
 
 
-            </>
+            </React.Fragment>
         }
         </div>
-    </>
+    </React.Fragment>
     )
 }
 
